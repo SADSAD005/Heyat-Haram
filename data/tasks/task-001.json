@@ -1,0 +1,52 @@
+{
+    "id": "task-001",
+    "number": 1,
+    "name": "بررسی سخنرانی‌های رهبر شهید در دیدار با مداحان",
+
+    "type": "study",
+
+    "description": "هر فرد یک سخنرانی طبق مصوب جلسه‌ی بخواند و خلاصه‌ای برای ارائه به دیگران ارائه کند.",
+
+    "registered_date": "1405-07-03",
+    "due_date": "1405-07-10",
+
+    "registered_by": "member-001",
+
+    "participants": [
+        {
+            "member": "member-001",
+            "responsibility": "دیدار با هیئت رزمندگان",
+            "status": "completed",
+
+            "sources": [
+                {
+                    "type": "image",
+                    "url": "task_sources/task-001_source/task-001_member-001.png"
+                }
+            ]
+        },
+        {
+            "member": "member-005",
+            "responsibility": "جمع‌آوری اطلاعات و تهیه جمع‌بندی نهایی",
+            "status": "completed",
+
+            "sources": [
+                {
+                    "type": "txt",
+                    "url": "task_sources/task-001_source/task-001_member-005.txt"
+                }
+            ]
+        }
+    ],
+
+    "final_sources": [
+        {
+            "type": "txt",
+            "url": "task_sources/task-001_source/task-001_member-005.txt"
+        },
+        {
+            "type": "text",
+            "content": "جمع‌بندی نهایی تکلیف در این قسمت قرار می‌گیرد."
+        }
+    ]
+}

@@ -1,0 +1,58 @@
+{
+	"members": [
+		{
+			"id": "member-001",
+			"name": "امین",
+			"family_name": "حقیقت‌نژاد",
+			"display_name": "حجت‌الاسلام حقیقت‌نژاد",
+			"role": "member",
+			"active": true,
+			"sort_order": 1
+		},
+		{
+			"id": "member-002",
+			"name": "مهدی",
+			"family_name": "ابراهیمیان",
+			"display_name": "مهدی ابراهیمیان",
+			"role": "member",
+			"active": true,
+			"sort_order": 2
+		},
+		{
+			"id": "member-003",
+			"name": "سجاد",
+			"family_name": "روشنایی",
+			"display_name": "سجاد روشنایی",
+			"role": "member",
+			"active": true,
+			"sort_order": 3
+		},
+		{
+			"id": "member-004",
+			"name": "مهدی",
+			"family_name": "حنایی‌‌نژاد",
+			"display_name": "مهدی حنایی‌نژاد",
+			"role": "member",
+			"active": true,
+			"sort_order": 4
+		},
+		{
+			"id": "member-005",
+			"name": "عرفان",
+			"family_name": "عظیمی",
+			"display_name": "سردار",
+			"role": "member",
+			"active": true,
+			"sort_order": 5
+		},
+		{
+			"id": "member-006",
+			"name": "نیما",
+			"family_name": "قضاوی",
+			"display_name": "پیر میکده",
+			"role": "member",
+			"active": true,
+			"sort_order": 6
+		}
+	]
+}

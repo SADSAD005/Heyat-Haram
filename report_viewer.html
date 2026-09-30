@@ -1,0 +1,2653 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>گزارش جلسه</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #000;
+            color: #d2d4b4;
+            font-family: Tahoma, Arial, sans-serif;
+            direction: rtl;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* ==============================
+           HEADER
+        ============================== */
+
+        .header {
+            width: 100%;
+            max-width: 900px;
+            height: 90px;
+            margin: 0 auto;
+            background: #0e6136;
+            border-radius: 0 0 25px 25px;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            gap: 30px;
+            overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .logo {
+            width: 75px;
+            height: auto;
+            display: block;
+        }
+
+        .meeting-title {
+            flex: 1;
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.5;
+            white-space: nowrap;
+        }
+
+        .meeting-date {
+            min-width: 130px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+
+        /* ==============================
+           MAIN
+        ============================== */
+
+        .content {
+            width: 90%;
+            max-width: 900px;
+            margin: 50px auto;
+        }
+
+
+        /* ==============================
+           DATE BOX
+        ============================== */
+
+        .date-box {
+            width: 100%;
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            overflow: hidden;
+        }
+
+        .date-item {
+            min-height: 95px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-left: 1px solid #333;
+            text-align: center;
+        }
+
+            .date-item:last-child {
+                border-left: none;
+            }
+
+        .date-label {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .date-value {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+
+        /* ==============================
+           SECTIONS
+        ============================== */
+
+        .section {
+            margin-top: 35px;
+        }
+
+        .section-title {
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .topics {
+            line-height: 2.2;
+            color: #ddd;
+            font-size: 16px;
+        }
+
+            .topics span {
+                white-space: nowrap;
+            }
+
+        .separator {
+            width: 100%;
+            height: 1px;
+            background: #333;
+            margin: 30px 0;
+        }
+
+
+        /* ==============================
+           DESCRIPTION
+        ============================== */
+
+        .description {
+            color: #ddd;
+            line-height: 2.2;
+            font-size: 16px;
+            white-space: pre-line;
+        }
+
+
+        /* ==============================
+           MEMBERS
+        ============================== */
+
+        .members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .member-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            max-width: 100%;
+            background: #d2d4b4;
+            color: #111;
+            padding: 6px 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+            text-decoration: none;
+            text-align: center;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            transition: transform 0.15s ease;
+        }
+
+            .member-link:hover {
+                transform: translateY(-2px);
+                text-decoration: none;
+            }
+
+        .member-label {
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+
+        /* ==============================
+           ACCORDION
+        ============================== */
+
+        .accordion {
+            width: 100%;
+            border: 1px solid #333;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        .accordion-header {
+            min-height: 65px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+            background: #080808;
+        }
+
+        .accordion-title {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .arrow {
+            font-size: 18px;
+            transition: transform 0.2s ease;
+        }
+
+        .accordion.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .accordion.open .accordion-content {
+            display: block;
+        }
+
+
+        /* ==============================
+           TASKS
+        ============================== */
+
+        .task {
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 15px;
+        }
+
+            .task:last-child {
+                margin-bottom: 0;
+            }
+
+
+        /* عنوان تکلیف */
+
+        .task-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 7px;
+        }
+
+
+        /* شرح تکلیف */
+
+        .task-description {
+            color: #ccc;
+            line-height: 1.9;
+            font-size: 15px;
+            white-space: pre-line;
+            margin-top: 0;
+            margin-bottom: 14px;
+        }
+
+
+        /* مشخصات تکلیف */
+
+        .task-meta {
+            width: 100%;
+            min-height: 42px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #aaa;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+            .task-meta strong {
+                color: #d2d4b4;
+                font-weight: bold;
+            }
+
+        .task-meta-separator {
+            color: #555;
+        }
+
+
+        /* ==============================
+           TASK TABLE
+        ============================== */
+
+        .task-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 18px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .task-table {
+            width: 100%;
+            min-width: 650px;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+            .task-table th,
+            .task-table td {
+                border-bottom: 1px solid #333;
+                padding: 11px 10px;
+                text-align: right;
+                vertical-align: middle;
+                font-size: 14px;
+            }
+
+            .task-table th {
+                color: #999;
+                font-weight: normal;
+                white-space: nowrap;
+            }
+
+            .task-table td {
+                color: #ddd;
+                line-height: 1.8;
+            }
+
+                .task-table th:nth-child(1),
+                .task-table td:nth-child(1) {
+                    width: 22%;
+                }
+
+                .task-table th:nth-child(2),
+                .task-table td:nth-child(2) {
+                    width: 38%;
+                }
+
+                .task-table th:nth-child(3),
+                .task-table td:nth-child(3) {
+                    width: 20%;
+                }
+
+                .task-table th:nth-child(4),
+                .task-table td:nth-child(4) {
+                    width: 20%;
+                }
+
+
+        /* وضعیت */
+
+        .task-status {
+            white-space: nowrap;
+        }
+
+
+        /* سورس */
+
+        .source-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 55px;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+            .source-badge.has-source {
+                background: #d2d4b4;
+                color: #111;
+            }
+
+            .source-badge.no-source {
+                background: #222;
+                color: #777;
+                border: 1px solid #333;
+            }
+
+
+        /* ==============================
+           DOCUMENTS
+        ============================== */
+
+        .documents {
+            color: #ccc;
+            line-height: 2;
+        }
+
+
+        /* ==============================
+           TAGS
+        ============================== */
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            color: #d2d4b4;
+            border: 1px solid #d2d4b4;
+            border-radius: 20px;
+            padding: 6px 14px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+            .tag:hover {
+                text-decoration: none;
+                background: #d2d4b4;
+                color: #111;
+            }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 700px) {
+
+            .header {
+                height: 75px;
+                padding: 0 15px;
+                gap: 12px;
+                border-radius: 0 0 20px 20px;
+            }
+
+            .logo {
+                width: 55px;
+            }
+
+            .meeting-title {
+                font-size: 18px;
+            }
+
+            .meeting-date {
+                min-width: auto;
+                font-size: 13px;
+            }
+
+
+            .content {
+                width: 92%;
+                margin-top: 35px;
+            }
+
+
+            /* تاریخ */
+
+            .date-box {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .date-item {
+                min-height: 85px;
+                border-left: 1px solid #333;
+                border-bottom: 1px solid #333;
+            }
+
+                .date-item:nth-child(3) {
+                    border-left: none;
+                }
+
+                .date-item:nth-child(4),
+                .date-item:nth-child(5),
+                .date-item:nth-child(6) {
+                    border-bottom: none;
+                }
+
+                .date-item:nth-child(6) {
+                    border-left: none;
+                }
+
+            .date-value {
+                font-size: 15px;
+            }
+
+            .date-label {
+                font-size: 12px;
+            }
+
+            .section-title {
+                font-size: 21px;
+            }
+
+
+            /* تکلیف */
+
+            .task {
+                padding: 15px;
+            }
+
+            .task-title {
+                font-size: 17px;
+            }
+
+            .task-description {
+                font-size: 14px;
+                line-height: 1.9;
+                margin-bottom: 12px;
+            }
+
+            .task-meta {
+                font-size: 12px;
+                padding: 8px;
+                overflow-x: auto;
+            }
+
+            .task-table-wrapper {
+                margin-top: 15px;
+            }
+
+            /*
+             * جدول عمداً min-width دارد.
+             * بنابراین در موبایل کاربر می‌تواند
+             * جدول را چپ و راست حرکت دهد.
+             */
+
+            .task-table {
+                min-width: 650px;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         HEADER
+    ============================== -->
+
+    <header class="header">
+
+        <a href="main.html"
+           class="logo-link"
+           title="صفحه اصلی">
+
+            <img src="logo_warm.png"
+                 alt="لوگو"
+                 class="logo">
+
+        </a>
+
+
+        <div class="meeting-title"
+             id="meetingTitle">
+            در حال بارگذاری...
+        </div>
+
+
+        <div class="meeting-date"
+             id="meetingDate">
+            -
+        </div>
+
+    </header>
+
+
+
+    <main class="content">
+
+
+        <!-- ==============================
+             DATE / TIME
+        ============================== -->
+
+        <section class="date-box">
+
+            <div class="date-item">
+
+                <div class="date-label">
+                    تاریخ شمسی
+                </div>
+
+                <div class="date-value"
+                     id="solarDate">
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="date-item">
+
+                <div class="date-label">
+                    تاریخ قمری
+                </div>
+
+                <div class="date-value"
+                     id="lunarDate">
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="date-item">
+
+                <div class="date-label">
+                    ساعت شروع
+                </div>
+
+                <div class="date-value"
+                     id="startTime">
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="date-item">
+
+                <div class="date-label">
+                    ساعت پایان
+                </div>
+
+                <div class="date-value"
+                     id="endTime">
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="date-item">
+
+                <div class="date-label">
+                    مدت جلسه
+                </div>
+
+                <div class="date-value"
+                     id="totalDuration">
+                    -
+                </div>
+
+            </div>
+
+
+            <div class="date-item">
+
+                <div class="date-label">
+                    مدت مفید
+                </div>
+
+                <div class="date-value"
+                     id="usefulDuration">
+                    -
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             TOPICS
+        ============================== -->
+
+        <section class="section">
+
+            <div class="section-title">
+                موضوعات
+            </div>
+
+            <div class="topics"
+                 id="topics">
+                -
+            </div>
+
+        </section>
+
+
+        <div class="separator"></div>
+
+
+
+        <!-- ==============================
+             DESCRIPTION
+        ============================== -->
+
+        <section>
+
+            <div class="description"
+                 id="description">
+                -
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             MEETING INFO
+        ============================== -->
+
+        <section class="accordion"
+                 id="meetingInfoAccordion">
+
+            <div class="accordion-header">
+
+                <div class="accordion-title">
+
+                    جلسه گردان:
+                    <span id="moderatorName">-</span>
+
+                </div>
+
+                <div class="arrow">
+                    ▼
+                </div>
+
+            </div>
+
+
+            <div class="accordion-content">
+
+
+                <div>
+
+                    <div class="member-label">
+
+                        حضار
+                        (<span id="presentCount">۰</span> نفر)
+
+                    </div>
+
+
+                    <div class="members"
+                         id="attendees">
+                    </div>
+
+                </div>
+
+
+
+                <div style="margin-top:25px;">
+
+                    <div class="member-label">
+                        کاتب
+                    </div>
+
+
+                    <div class="members"
+                         id="secretary">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             MINUTES
+        ============================== -->
+
+        <section class="section">
+
+            <div class="section-title">
+                صورت جلسه
+            </div>
+
+            <div class="description"
+                 id="minutes">
+                -
+            </div>
+
+        </section>
+
+
+        <div class="separator"></div>
+
+
+
+        <!-- ==============================
+             NEXT MEETING TOPICS
+        ============================== -->
+
+        <section>
+
+            <div class="section-title">
+                موضوعات جلسه بعد
+            </div>
+
+            <div class="description"
+                 id="openTopics">
+                -
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             TASKS
+        ============================== -->
+
+        <section class="accordion"
+                 id="tasksAccordion"
+                 style="display:none;">
+
+            <div class="accordion-header">
+
+                <div class="accordion-title">
+                    تکالیف
+                </div>
+
+                <div class="arrow">
+                    ▼
+                </div>
+
+            </div>
+
+
+            <div class="accordion-content"
+                 id="tasksContent">
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             DOCUMENTS
+        ============================== -->
+
+        <section class="accordion"
+                 id="documentsAccordion"
+                 style="display:none;">
+
+            <div class="accordion-header">
+
+                <div class="accordion-title">
+                    اسناد
+                </div>
+
+                <div class="arrow">
+                    ▼
+                </div>
+
+            </div>
+
+
+            <div class="accordion-content">
+
+                <div class="documents"
+                     id="documents">
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==============================
+             TAGS
+        ============================== -->
+
+        <section class="section">
+
+            <div class="tags"
+                 id="tags">
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <script>
+
+
+        /* =====================================================
+        گرفتن شناسه جلسه از URL
+        ===================================================== */
+
+        const params =
+        new URLSearchParams(
+        window.location.search
+        );
+
+
+        const meetingId =
+        params.get("id");
+
+
+
+        /* =====================================================
+        اعداد فارسی
+        ===================================================== */
+
+        function toPersianDigits(value) {
+
+        if (
+        value === null ||
+        value === undefined
+        ) {
+        return "";
+        }
+
+
+        return String(value).replace(
+        /\d/g,
+        digit => "۰۱۲۳۴۵۶۷۸۹"[digit]
+        );
+        }
+
+
+
+        /* =====================================================
+        مدت زمان
+        ===================================================== */
+
+        function formatDuration(totalMinutes) {
+
+        totalMinutes =
+        Math.max(
+        0,
+        Number(totalMinutes) || 0
+        );
+
+
+        const hours =
+        Math.floor(
+        totalMinutes / 60
+        );
+
+
+        const minutes =
+        totalMinutes % 60;
+
+
+        if (hours === 0) {
+
+        return `${toPersianDigits(minutes)} دقیقه`;
+        }
+
+
+        if (minutes === 0) {
+
+        return `${toPersianDigits(hours)} ساعت`;
+        }
+
+
+        return `${toPersianDigits(hours)} ساعت و ${toPersianDigits(minutes)} دقیقه`;
+        }
+
+
+
+        /* =====================================================
+        اختلاف ساعت
+        ===================================================== */
+
+        function timeDifference(start, end) {
+
+        if (!start || !end) {
+        return 0;
+        }
+
+
+        const [
+        startHour,
+        startMinute
+        ] =
+        start
+        .split(":")
+        .map(Number);
+
+
+        const [
+        endHour,
+        endMinute
+        ] =
+        end
+        .split(":")
+        .map(Number);
+
+
+        const startTotal =
+        startHour * 60 +
+        startMinute;
+
+
+        const endTotal =
+        endHour * 60 +
+        endMinute;
+
+
+        let difference =
+        endTotal -
+        startTotal;
+
+
+        if (difference < 0) {
+        difference += 24 * 60;
+        }
+
+
+        return difference;
+        }
+
+
+
+        /* =====================================================
+        لینک عضو
+        ===================================================== */
+
+        function createMemberLink(member) {
+
+        const link =
+        document.createElement("a");
+
+
+        link.className =
+        "member-link";
+
+
+        link.href =
+        `member_viewer.html?id=${encodeURIComponent(member.id)}`;
+
+
+        link.textContent =
+        member.display_name ||
+        `${member.name || ""} ${member.family_name || ""}`.trim();
+
+
+        return link;
+        }
+
+
+
+        /* =====================================================
+        پیدا کردن عضو
+        ===================================================== */
+
+        function getMember(memberId, members) {
+
+        return members.find(
+        member =>
+        member.id === memberId
+        );
+        }
+
+
+
+        /* =====================================================
+        حضار
+        ===================================================== */
+
+        function renderAttendees(
+        meeting,
+        members
+        ) {
+
+        const container =
+        document.getElementById(
+        "attendees"
+        );
+
+
+        container.innerHTML = "";
+
+
+        const attendance =
+        meeting.attendance || [];
+
+
+        const presentStatuses = [
+        "present",
+        "late_15",
+        "late"
+        ];
+
+
+        const presentMembers =
+        attendance.filter(
+        item =>
+        presentStatuses.includes(
+        item.status
+        )
+        );
+
+
+        document.getElementById(
+        "presentCount"
+        ).textContent =
+        toPersianDigits(
+        presentMembers.length
+        );
+
+
+        presentMembers.forEach(
+        item => {
+
+        const member =
+        getMember(
+        item.member,
+        members
+        );
+
+
+        if (!member) {
+        return;
+        }
+
+
+        container.appendChild(
+        createMemberLink(member)
+        );
+        }
+        );
+        }
+
+
+
+        /* =====================================================
+        کاتب
+        ===================================================== */
+
+        function renderSecretary(
+        meeting,
+        members
+        ) {
+
+        const container =
+        document.getElementById(
+        "secretary"
+        );
+
+
+        container.innerHTML = "";
+
+
+        const secretary =
+        getMember(
+        meeting.secretary,
+        members
+        );
+
+
+        if (!secretary) {
+        return;
+        }
+
+
+        container.appendChild(
+        createMemberLink(secretary)
+        );
+        }
+
+
+
+        /* =====================================================
+        جلسه گردان
+        ===================================================== */
+
+        function renderModerator(
+        meeting,
+        members
+        ) {
+
+        const container =
+        document.getElementById(
+        "moderatorName"
+        );
+
+
+        container.innerHTML = "";
+
+
+        const moderator =
+        getMember(
+        meeting.moderator,
+        members
+        );
+
+
+        if (!moderator) {
+
+        container.textContent =
+        "-";
+
+        return;
+        }
+
+
+        container.appendChild(
+        createMemberLink(moderator)
+        );
+        }
+
+
+
+        /* =====================================================
+        موضوعات
+        ===================================================== */
+
+        function renderTopics(meeting) {
+
+        const container =
+        document.getElementById(
+        "topics"
+        );
+
+
+        const topics =
+        meeting.topics || [];
+
+
+        if (!topics.length) {
+
+        container.textContent =
+        "-";
+
+        return;
+        }
+
+
+        container.innerHTML =
+        topics
+        .map(
+        topic =>
+        `<span>${escapeHtml(topic)}</span>`
+        )
+        .join(
+        " &nbsp; | &nbsp; "
+        );
+        }
+
+
+
+        /* =====================================================
+        موضوعات جلسه بعد
+        ===================================================== */
+
+        function renderOpenTopics(meeting) {
+
+        const container =
+        document.getElementById(
+        "openTopics"
+        );
+
+
+        const topics =
+        meeting.open_topics || [];
+
+
+        if (!topics.length) {
+
+        container.textContent =
+        "-";
+
+        return;
+        }
+
+
+        container.innerHTML =
+        topics
+        .map(
+        topic => {
+
+        let html =
+        `<div style="margin-bottom:15px;">`;
+
+
+        html +=
+        `<strong>${escapeHtml(topic.title || "")}</strong>`;
+
+
+        if (topic.description) {
+
+        html +=
+        `<div style="color:#bbb;margin-top:5px;">
+        ${escapeHtml(topic.description)}
+        </div>`;
+        }
+
+
+        html +=
+        `</div>`;
+
+
+        return html;
+        }
+        )
+        .join("");
+        }
+
+
+
+        /* =====================================================
+        وضعیت تکلیف
+
+        فعلاً وضعیت‌های موجود را نگه می‌داریم.
+        بعداً می‌توانیم statusهای جدید type study را
+        مستقل تعریف کنیم.
+        ===================================================== */
+
+        function getTaskStatusLabel(status) {
+
+        const statuses = {
+
+        ongoing: "جاری",
+
+        completed: "تکمیل",
+
+        cancelled: "لغو",
+
+        late_done: "تکمیل با تأخیر"
+
+        };
+
+
+        return (
+        statuses[status] ||
+        status ||
+        "-"
+        );
+        }
+
+
+
+        /* =====================================================
+        آیا یک نفر سورس دارد؟
+        ===================================================== */
+
+        function hasSources(participant) {
+
+        return (
+        Array.isArray(
+        participant?.sources
+        ) &&
+        participant.sources.length > 0
+        );
+        }
+
+
+
+        /* =====================================================
+        ساخت نشان سورس
+        ===================================================== */
+
+        function createSourceBadge(
+    participant,
+    taskId
+) {
+
+    const hasSource =
+        hasSources(participant);
+
+    if (!hasSource) {
+
+        const badge =
+            document.createElement("span");
+
+        badge.className =
+            "source-badge no-source";
+
+        badge.textContent =
+            "ندارد";
+
+        return badge;
+    }
+
+
+    const link =
+        document.createElement("a");
+
+    link.className =
+        "source-badge has-source";
+
+    link.href =
+        `task_source_viewer.html?task=${encodeURIComponent(taskId)}&member=${encodeURIComponent(participant.member)}`;
+
+    link.textContent =
+        participant.sources.length > 1
+            ? `مشاهده ${toPersianDigits(participant.sources.length)} فایل`
+            : "مشاهده";
+
+    link.target =
+        "_blank";
+
+    return link;
+}
+
+
+
+        /* =====================================================
+        نمایش یک تکلیف مطالعاتی
+        ===================================================== */
+
+        function renderStudyTask(
+        task,
+        members
+        ) {
+
+        const box =
+        document.createElement(
+        "div"
+        );
+
+
+        box.className =
+        "task";
+
+
+        /* -------------------------
+        عنوان
+        ------------------------- */
+
+        const title =
+        document.createElement(
+        "div"
+        );
+
+
+        title.className =
+        "task-title";
+
+
+        title.textContent =
+        task.name ||
+        "-";
+
+
+        box.appendChild(title);
+
+
+
+        /* -------------------------
+        شرح
+        ------------------------- */
+
+        if (task.description) {
+
+        const description =
+        document.createElement(
+        "div"
+        );
+
+
+        description.className =
+        "task-description";
+
+
+        description.textContent =
+        task.description;
+
+
+        box.appendChild(
+        description
+        );
+        }
+
+
+
+        /* -------------------------
+        مشخصات تکلیف
+        ------------------------- */
+
+        const meta =
+        document.createElement(
+        "div"
+        );
+
+
+        meta.className =
+        "task-meta";
+
+
+        const registeredBy =
+        getMember(
+        task.registered_by,
+        members
+        );
+
+
+        const registeredByName =
+        registeredBy
+        ? (
+        registeredBy.display_name ||
+        `${registeredBy.name || ""} ${registeredBy.family_name || ""}`.trim()
+        )
+        : "-";
+
+
+        const registeredDate =
+        task.registered_date
+        ? toPersianDigits(
+        task.registered_date
+        )
+        : "-";
+
+
+        const dueDate =
+        task.due_date
+        ? toPersianDigits(
+        task.due_date
+        )
+        : "-";
+
+
+        meta.innerHTML = `
+
+        <strong>
+        تعریف‌کننده:
+        </strong>
+
+        <span>
+        ${escapeHtml(registeredByName)}
+        </span>
+
+        <span class="task-meta-separator">
+        |
+        </span>
+
+        <strong>
+        شروع:
+        </strong>
+
+        <span>
+        ${escapeHtml(registeredDate)}
+        </span>
+
+        <span class="task-meta-separator">
+        |
+        </span>
+
+        <strong>
+        مقرری:
+        </strong>
+
+        <span>
+        ${escapeHtml(dueDate)}
+        </span>
+
+        `;
+
+
+        box.appendChild(
+        meta
+        );
+
+
+
+        /* -------------------------
+        جدول افراد
+        ------------------------- */
+
+        const participants =
+        Array.isArray(
+        task.participants
+        )
+        ? task.participants
+        : [];
+
+
+        if (participants.length) {
+
+        const wrapper =
+        document.createElement(
+        "div"
+        );
+
+
+        wrapper.className =
+        "task-table-wrapper";
+
+
+        const table =
+        document.createElement(
+        "table"
+        );
+
+
+        table.className =
+        "task-table";
+
+
+        table.innerHTML = `
+
+        <thead>
+
+        <tr>
+
+        <th>
+        اسم
+        </th>
+
+        <th>
+        شرح
+        </th>
+
+        <th>
+        وضعیت
+        </th>
+
+        <th>
+        سورس
+        </th>
+
+        </tr>
+
+        </thead>
+
+        <tbody>
+        </tbody>
+
+        `;
+
+
+        const tbody =
+        table.querySelector(
+        "tbody"
+        );
+
+
+        participants.forEach(
+        participant => {
+
+        const tr =
+        document.createElement(
+        "tr"
+        );
+
+
+        /* اسم */
+
+        const nameCell =
+        document.createElement(
+        "td"
+        );
+
+
+        const member =
+        getMember(
+        participant.member,
+        members
+        );
+
+
+        if (member) {
+
+        const memberLink =
+        createMemberLink(
+        member
+        );
+
+
+        memberLink.style.padding =
+        "5px 10px";
+
+
+        memberLink.style.borderRadius =
+        "8px";
+
+
+        nameCell.appendChild(
+        memberLink
+        );
+
+        } else {
+
+        nameCell.textContent =
+        "-";
+        }
+
+
+
+        /* شرح */
+
+        const responsibilityCell =
+        document.createElement(
+        "td"
+        );
+
+
+        responsibilityCell.textContent =
+        participant.responsibility ||
+        "-";
+
+
+
+        /* وضعیت */
+
+        const statusCell =
+        document.createElement(
+        "td"
+        );
+
+
+        statusCell.className =
+        "task-status";
+
+
+        statusCell.textContent =
+        getTaskStatusLabel(
+        participant.status
+        );
+
+
+
+        /* سورس */
+
+        const sourceCell =
+        document.createElement(
+        "td"
+        );
+
+
+        sourceCell.appendChild(
+        createSourceBadge(
+        participant,
+        task.id
+        )
+        );
+
+
+        tr.appendChild(
+        nameCell
+        );
+
+
+        tr.appendChild(
+        responsibilityCell
+        );
+
+
+        tr.appendChild(
+        statusCell
+        );
+
+
+        tr.appendChild(
+        sourceCell
+        );
+
+
+        tbody.appendChild(
+        tr
+        );
+        }
+        );
+
+
+        wrapper.appendChild(
+        table
+        );
+
+
+        box.appendChild(
+        wrapper
+        );
+        }
+
+
+        return box;
+        }
+
+
+
+        /* =====================================================
+        نمایش تکلیف بر اساس type
+        ===================================================== */
+
+        function renderTaskByType(
+        task,
+        members
+        ) {
+
+        /*
+        * هر type در آینده renderer خودش را خواهد داشت.
+        */
+
+        switch (task.type) {
+
+        case "study":
+
+        return renderStudyTask(
+        task,
+        members
+        );
+
+
+        default:
+
+        return renderUnknownTask(
+        task
+        );
+        }
+        }
+
+
+
+        /* =====================================================
+        type ناشناخته
+        ===================================================== */
+
+        function renderUnknownTask(task) {
+
+        const box =
+        document.createElement(
+        "div"
+        );
+
+
+        box.className =
+        "task";
+
+
+        const title =
+        document.createElement(
+        "div"
+        );
+
+
+        title.className =
+        "task-title";
+
+
+        title.textContent =
+        task.name ||
+        "تکلیف";
+
+
+        box.appendChild(
+        title
+        );
+
+
+        const description =
+        document.createElement(
+        "div"
+        );
+
+
+        description.className =
+        "task-description";
+
+
+        description.textContent =
+        "نمایش این نوع تکلیف هنوز تعریف نشده است.";
+
+
+        box.appendChild(
+        description
+        );
+
+
+        return box;
+        }
+
+
+
+        /* =====================================================
+        نمایش تکالیف جلسه
+        ===================================================== */
+
+        async function renderTasks(
+    meeting,
+    members
+) {
+
+    const accordion =
+        document.getElementById(
+            "tasksAccordion"
+        );
+
+    const container =
+        document.getElementById(
+            "tasksContent"
+        );
+
+    container.innerHTML = "";
+
+    const taskItems =
+        Array.isArray(meeting.tasks)
+            ? meeting.tasks
+            : [];
+
+
+    /*
+     * اگر جلسه هیچ تکلیفی نداشته باشد
+     */
+    if (!taskItems.length) {
+
+        accordion.style.display =
+            "none";
+
+        return;
+    }
+
+
+    /*
+     * استخراج ID تکلیف
+     *
+     * هر دو حالت را قبول می‌کنیم:
+     *
+     * "task-001"
+     *
+     * یا:
+     *
+     * {
+     *     "id": "task-001"
+     * }
+     */
+    const taskIds =
+        taskItems
+            .map(
+                item =>
+                    typeof item === "string"
+                        ? item
+                        : item?.id
+            )
+            .filter(Boolean);
+
+
+    if (!taskIds.length) {
+
+        accordion.style.display =
+            "none";
+
+        return;
+    }
+
+
+    /*
+     * بارگذاری فایل‌های تکلیف
+     */
+    const taskResults =
+        await Promise.all(
+            taskIds.map(
+                async taskId => {
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                `data/tasks/${encodeURIComponent(taskId)}.json`
+                            );
+
+
+                        if (!response.ok) {
+
+                            console.error(
+                                `فایل تکلیف پیدا نشد: ${taskId}`
+                            );
+
+                            return null;
+                        }
+
+
+                        return await response.json();
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            `خطا در بارگذاری تکلیف ${taskId}`,
+                            error
+                        );
+
+                        return null;
+                    }
+                }
+            )
+        );
+
+
+    /*
+     * فقط تکالیف معتبر
+     */
+    const validTasks =
+        taskResults.filter(
+            task =>
+                task &&
+                task.id
+        );
+
+
+    /*
+     * اگر هیچ تکلیف معتبری پیدا نشد
+     */
+    if (!validTasks.length) {
+
+        accordion.style.display =
+            "none";
+
+        return;
+    }
+
+
+    /*
+     * نمایش آکاردئون
+     */
+    accordion.style.display =
+        "block";
+
+
+    /*
+     * نمایش تکالیف
+     */
+    validTasks.forEach(
+        task => {
+
+            const taskElement =
+                renderTaskByType(
+                    task,
+                    members
+                );
+
+            container.appendChild(
+                taskElement
+            );
+        }
+    );
+}
+
+
+       
+
+
+
+        /* =====================================================
+        نمایش اسناد جلسه
+        ===================================================== */
+
+        function renderDocuments(meeting) {
+
+        const accordion =
+        document.getElementById(
+        "documentsAccordion"
+        );
+
+
+        const container =
+        document.getElementById(
+        "documents"
+        );
+
+
+        const media =
+        meeting.media || {};
+
+
+        const audio =
+        Array.isArray(media.audio)
+        ? media.audio
+        : [];
+
+
+        const video =
+        Array.isArray(media.video)
+        ? media.video
+        : [];
+
+
+        const images =
+        Array.isArray(media.images)
+        ? media.images
+        : [];
+
+
+        if (
+        !audio.length &&
+        !video.length &&
+        !images.length
+        ) {
+
+        accordion.style.display =
+        "none";
+
+        return;
+        }
+
+
+        accordion.style.display =
+        "block";
+
+
+        container.innerHTML =
+        "";
+
+
+        if (images.length) {
+
+        const title =
+        document.createElement(
+        "div"
+        );
+
+
+        title.textContent =
+        `تصاویر: ${toPersianDigits(images.length)} فایل`;
+
+
+        container.appendChild(
+        title
+        );
+        }
+
+
+        if (video.length) {
+
+        const title =
+        document.createElement(
+        "div"
+        );
+
+
+        title.textContent =
+        `ویدئو: ${toPersianDigits(video.length)} فایل`;
+
+
+        container.appendChild(
+        title
+        );
+        }
+
+
+        if (audio.length) {
+
+        const title =
+        document.createElement(
+        "div"
+        );
+
+
+        title.textContent =
+        `صوت: ${toPersianDigits(audio.length)} فایل`;
+
+
+        container.appendChild(
+        title
+        );
+        }
+        }
+
+
+
+        /* =====================================================
+        هشتگ‌ها
+        ===================================================== */
+
+        function renderTags(meeting) {
+
+        const container =
+        document.getElementById(
+        "tags"
+        );
+
+
+        container.innerHTML =
+        "";
+
+
+        const tags =
+        meeting.tags || [];
+
+
+        tags.forEach(
+        tag => {
+
+        const link =
+        document.createElement(
+        "a"
+        );
+
+
+        link.className =
+        "tag";
+
+
+        link.href =
+        `tag_viewer.html?tag=${encodeURIComponent(tag)}`;
+
+
+        link.textContent =
+        `#${tag}`;
+
+
+        container.appendChild(
+        link
+        );
+        }
+        );
+        }
+
+
+
+        /* =====================================================
+        HTML Escape
+        ===================================================== */
+
+        function escapeHtml(value) {
+
+        if (
+        value === null ||
+        value === undefined
+        ) {
+        return "";
+        }
+
+
+        return String(value)
+        .replace(
+        /&/g,
+        "&amp;"
+        )
+        .replace(
+        /</g,
+        "&lt;"
+        )
+        .replace(
+        />/g,
+        "&gt;"
+        )
+        .replace(
+        /"/g,
+        "&quot;"
+        )
+        .replace(
+        /'/g,
+        "&#039;"
+        );
+        }
+
+
+
+        /* =====================================================
+        Accordion
+        ===================================================== */
+
+        function setupAccordions() {
+
+        document
+        .querySelectorAll(
+        ".accordion"
+        )
+        .forEach(
+        accordion => {
+
+        const header =
+        accordion.querySelector(
+        ".accordion-header"
+        );
+
+
+        if (!header) {
+        return;
+        }
+
+
+        header.addEventListener(
+        "click",
+        () => {
+
+        accordion.classList.toggle(
+        "open"
+        );
+        }
+        );
+        }
+        );
+        }
+
+
+
+        /* =====================================================
+        بارگذاری جلسه
+        ===================================================== */
+
+        async function loadMeeting() {
+
+        if (!meetingId) {
+
+        document.getElementById(
+        "meetingTitle"
+        ).textContent =
+        "شناسه جلسه مشخص نشده است.";
+
+        return;
+        }
+
+
+        try {
+
+        const [
+        meetingResponse,
+        membersResponse
+        ] =
+        await Promise.all([
+
+        fetch(
+        `data/meetings/${encodeURIComponent(meetingId)}.json`
+        ),
+
+        fetch(
+        "data/members.json"
+        )
+
+        ]);
+
+
+        if (!meetingResponse.ok) {
+
+        throw new Error(
+        "فایل جلسه پیدا نشد."
+        );
+        }
+
+
+        if (!membersResponse.ok) {
+
+        throw new Error(
+        "فایل اعضا پیدا نشد."
+        );
+        }
+
+
+        const meeting =
+        await meetingResponse.json();
+
+
+        const membersData =
+        await membersResponse.json();
+
+
+        const members =
+        membersData.members || [];
+
+
+
+        /* =========================
+        عنوان جلسه
+        ========================= */
+
+        let meetingNumber =
+        meeting.id
+        ? meeting.id.replace(
+        "meeting-",
+        ""
+        )
+        : "";
+
+
+        const parsedMeetingNumber =
+        parseInt(
+        meetingNumber,
+        10
+        );
+
+
+        meetingNumber =
+        Number.isNaN(
+        parsedMeetingNumber
+        )
+        ? ""
+        : String(
+        parsedMeetingNumber
+        );
+
+
+        const meetingTitle =
+        meeting.name &&
+        meeting.name.trim() !== ""
+        ? meeting.name.trim()
+        : `جلسه شماره ${toPersianDigits(meetingNumber)}`;
+
+
+        document.getElementById(
+        "meetingTitle"
+        ).textContent =
+        meetingTitle;
+
+
+
+        /* =========================
+        تاریخ هدر
+        ========================= */
+
+        document.getElementById(
+        "meetingDate"
+        ).textContent =
+        toPersianDigits(
+        meeting.datetime?.date_solar || "-"
+        );
+
+
+
+        /* =========================
+        تاریخ و زمان
+        ========================= */
+
+        document.getElementById(
+        "solarDate"
+        ).textContent =
+        toPersianDigits(
+        meeting.datetime?.date_solar || "-"
+        );
+
+
+        document.getElementById(
+        "lunarDate"
+        ).textContent =
+        toPersianDigits(
+        meeting.datetime?.date_lunar || "-"
+        );
+
+
+        document.getElementById(
+        "startTime"
+        ).textContent =
+        toPersianDigits(
+        meeting.datetime?.start_time || "-"
+        );
+
+
+        document.getElementById(
+        "endTime"
+        ).textContent =
+        toPersianDigits(
+        meeting.datetime?.end_time || "-"
+        );
+
+
+
+        /* =========================
+        مدت جلسه
+        ========================= */
+
+        const totalDuration =
+        timeDifference(
+        meeting.datetime?.start_time,
+        meeting.datetime?.end_time
+        );
+
+
+        document.getElementById(
+        "totalDuration"
+        ).textContent =
+        formatDuration(
+        totalDuration
+        );
+
+
+
+        /* =========================
+        مدت مفید
+        ========================= */
+
+        const interruptionMinutes =
+        Number(
+        meeting.datetime
+        ?.total_interruption_minutes || 0
+        );
+
+
+        const usefulDuration =
+        Math.max(
+        0,
+        totalDuration -
+        interruptionMinutes
+        );
+
+
+        document.getElementById(
+        "usefulDuration"
+        ).textContent =
+        formatDuration(
+        usefulDuration
+        );
+
+
+
+        /* =========================
+        اطلاعات جلسه
+        ========================= */
+
+        renderTopics(
+        meeting
+        );
+
+
+        document.getElementById(
+        "description"
+        ).textContent =
+        meeting.description ||
+        "-";
+
+
+        document.getElementById(
+        "minutes"
+        ).textContent =
+        meeting.minutes ||
+        "-";
+
+
+        renderModerator(
+        meeting,
+        members
+        );
+
+
+        renderAttendees(
+        meeting,
+        members
+        );
+
+
+        renderSecretary(
+        meeting,
+        members
+        );
+
+
+        renderOpenTopics(
+        meeting
+        );
+
+
+
+        /* =========================
+        تکالیف
+
+        مهم:
+        اینجا دیگر task object
+        نداریم؛ فقط ID داریم.
+        ========================= */
+
+        await renderTasks(
+        meeting,
+        members
+        );
+
+
+
+        /* =========================
+        اسناد
+        ========================= */
+
+        renderDocuments(
+        meeting
+        );
+
+
+
+        /* =========================
+        تگ‌ها
+        ========================= */
+
+        renderTags(
+        meeting
+        );
+
+
+
+        /* =========================
+        آکاردئون‌ها
+        ========================= */
+
+        setupAccordions();
+
+        }
+
+        catch (error) {
+
+        console.error(
+        error
+        );
+
+
+        document.getElementById(
+        "meetingTitle"
+        ).textContent =
+        "خطا در بارگذاری گزارش جلسه";
+
+
+        document.getElementById(
+        "description"
+        ).textContent =
+        error.message;
+        }
+        }
+
+
+
+        /* =====================================================
+        شروع
+        ===================================================== */
+
+        loadMeeting();
+
+    </script>
+
+</body>
+
+</html>

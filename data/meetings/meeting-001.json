@@ -1,0 +1,77 @@
+{
+	"id": "meeting-001",
+	"name": "مالی  پریم فاطمیه",
+
+	"datetime": {
+		"date_gregorian": "2026-09-25",
+		"date_solar": "1405-07-03",
+		"date_lunar": "1448-04-03",
+
+		"start_time": "18:30",
+		"end_time": "21:15",
+
+		"interruptions": [
+			{
+				"duration_minutes": 20
+			}
+		],
+
+		"total_interruption_minutes": 20
+	},
+
+	"moderator": "member-001",
+
+	"attendance": [
+		{
+			"member": "member-001",
+			"status": "present"
+		},
+		{
+			"member": "member-002",
+			"status": "late_15"
+		},
+		{
+			"member": "member-003",
+			"status": "late"
+		},
+		{
+			"member": "member-004",
+			"status": "absent"
+		}
+	],
+
+	"secretary": "member-005",
+
+	"topics": [
+		"بررسی برنامه مراسم",
+		"بررسی بودجه",
+		"تقسیم مسئولیت‌ها"
+	],
+
+	"description": "شرح کلی مباحث مطرح‌شده در جلسه در این قسمت نوشته می‌شود.",
+
+	"minutes": "صورت جلسه و نتیجه مباحث در این قسمت نوشته می‌شود.",
+
+	"tasks": [
+		"task-001"
+	],
+
+	"open_topics": [
+		{
+			"id": "open-001",
+			"title": "بررسی نهایی بودجه",
+			"description": "در جلسه بعد بررسی شود."
+		}
+	],
+
+	"media": {
+		"audio": [],
+		"video": [],
+		"images": []
+	},
+
+	"tags": [
+		"مراسم",
+		"بودجه"
+	]
+}

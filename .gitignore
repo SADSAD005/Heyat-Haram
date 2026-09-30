@@ -1,0 +1,15 @@
+# Windows
+Thumbs.db
+Desktop.ini
+
+# VS Code
+.vscode/
+
+# Local environment
+.env
+.env.*
+
+# OS / editor temporary files
+*.tmp
+*.temp
+*.bak

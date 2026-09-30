@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>سلسله جلسات هیئت حرم</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Tahoma, Arial, sans-serif;
+            min-height: 100vh;
+        }
+
+
+        /* =================================
+           کادر سبز اصلی
+           ================================= */
+
+        .header {
+            width: 100%;
+            max-width: 900px;
+            height: 800px;
+            margin: 0 auto;
+            background: #0e6136;
+            border-radius: 0 0 35px 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 0px;
+        }
+
+
+        /* =================================
+           لوگو
+           ================================= */
+
+        .logo {
+            width: 600px;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            transform: translateY(-50px);
+        }
+
+
+        /* =================================
+           عنوان
+           ================================= */
+
+        .title-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            max-width: 900px;
+            height: 90px;
+            margin: -90px auto 0;
+            background: #0e6136;
+            border-radius: 0 0 30px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .title {
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+
+        /* =================================
+           بخش مشکی پایین
+           ================================= */
+
+        .content {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #000;
+            min-height: 1500px;
+            padding: 70px 30px 100px;
+        }
+
+
+        /* =================================
+           محتوای آزمایشی
+           ================================= */
+
+        .dummy-content {
+            text-align: center;
+            color: #aaa;
+            line-height: 2;
+        }
+
+
+        /* =================================
+           موبایل
+           ================================= */
+
+        @media (max-width: 600px) {
+
+            .header {
+                height: 540px;
+                padding-top: 35px;
+                border-radius: 0 0 28px 28px;
+            }
+
+
+            .logo {
+                width: 250px;
+            }
+
+
+            .title-bar {
+                height: 80px;
+                margin-top: -80px;
+                border-radius: 0 0 24px 24px;
+            }
+
+
+            .title {
+                font-size: 23px;
+            }
+
+
+            .content {
+                padding: 60px 20px 100px;
+            }
+        }
+
+        /* =================================
+   بخش معرفی
+   ================================= */
+
+        .introduction {
+            width: 100%;
+            margin: 0 auto;
+            text-align: right;
+            padding: 10px 0px;
+        }
+
+        .section-title {
+            width: 90%;
+            margin: 0 auto 25px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: right;
+            color: #d2d4b4;
+        }
+
+        .intro-box {
+            width: 90%;
+            margin: 0 auto;
+            padding: 25px 30px;
+            background: #d2d4b4;
+            border: 1px solid #0e6136;
+            border-radius: 20px;
+            text-align: right;
+            color: #111;
+            line-height: 2;
+            font-size: 16px;
+        }
+
+
+        /* =================================
+        موبایل
+        ================================= */
+
+        @media (max-width: 600px) {
+
+            .introduction {
+                width: 100%;
+            }
+
+            .section-title {
+                font-size: 21px;
+                margin-bottom: 20px;
+            }
+
+            .intro-box {
+                width: 90%;
+                padding: 20px;
+                font-size: 15px;
+                border-radius: 17px;
+            }
+        }
+
+        /* =================================
+   بخش گزینه‌ها
+   ================================= */
+
+        .menu-section {
+            width: 100%;
+            margin: 80px auto 0;
+        }
+
+
+        /* عنوان */
+
+        .section-title {
+            width: 90%;
+            margin: 0 auto 25px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: right;
+            color: #d2d4b4;
+        }
+
+
+        /* کادر شش گزینه */
+
+        .menu-box {
+            width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+            background: #0e6136;
+            border: 1px solid #0e6136;
+            border-radius: 20px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+
+        /* دکمه‌ها */
+
+        .menu-button {
+            min-height: 100px;
+            background: #d2d4b4;
+            border: none;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #111;
+            font-family: inherit;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+
+            .menu-button:hover {
+                transform: translateY(-3px);
+                background: #147a46;
+            }
+
+
+        /* =================================
+   باکس توضیحات
+   ================================= */
+
+        .menu-description {
+            width: 90%;
+            min-height: 65px;
+            margin: 12px auto 0;
+            padding: 15px 25px;
+            background: #d2d4b4;
+            border: 1px solid #0e6136;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #111;
+            font-size: 15px;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: 0.25s;
+            pointer-events: none;
+        }
+
+
+            /* وقتی توضیح فعال است */
+
+            .menu-description.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+
+        /* =================================
+   موبایل
+   ================================= */
+
+        @media (max-width: 600px) {
+
+            .menu-section {
+                margin-top: 60px;
+            }
+
+
+            .section-title {
+                font-size: 21px;
+                margin-bottom: 20px;
+            }
+
+
+            .menu-box {
+                width: 90%;
+                padding: 15px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                border-radius: 17px;
+            }
+
+
+            .menu-button {
+                min-height: 100px;
+                background: #d2d4b4;
+                border: none;
+                border-radius: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #111;
+                font-family: inherit;
+                font-size: 18px;
+                font-weight: bold;
+                text-decoration: none;
+                cursor: pointer;
+                transition: 0.2s;
+            }
+
+
+            .menu-description {
+                width: 90%;
+                min-height: 80px;
+                padding: 12px 18px;
+                font-size: 14px;
+                line-height: 1.9;
+                border-radius: 15px;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         کادر سبز و لوگو
+         ================================= -->
+
+    <header class="header">
+
+        <img src="logo.png"
+             alt="لوگوی سلسله جلسات هیئت حرم"
+             class="logo">
+
+    </header>
+
+
+    <!-- =================================
+         تنها عنوان صفحه
+         ================================= -->
+
+    <div class="title-bar">
+
+        <h1 class="title">
+            سلسله جلسات هیئت حرم
+        </h1>
+
+    </div>
+
+
+    <!-- =================================
+         بخش مشکی
+         ================================= -->
+
+    <main class="content">
+
+        <section class="introduction">
+
+            <h2 class="section-title">
+                هیئت حرم کجاست؟
+            </h2>
+
+            <div class="intro-box">
+                <p>
+                    متن معرفی اینجا قرار می‌گیرد.
+                    می‌توانی چند خط متن درباره سلسله جلسات،
+                    هدف، روند برگزاری و سایر توضیحات بنویسی.
+                </p>
+            </div>
+
+        </section>
+        <section class="introduction">
+
+            <h2 class="section-title">
+                هیئت حرم کجاست؟
+            </h2>
+
+            <div class="intro-box">
+                <p>
+                    متن معرفی اینجا قرار می‌گیرد.
+                    می‌توانی چند خط متن درباره سلسله جلسات،
+                    هدف، روند برگزاری و سایر توضیحات بنویسی.
+                </p>
+            </div>
+
+        </section>
+
+
+
+        <section class="menu-section">
+
+            <h2 class="section-title">
+                بخش‌های سایت
+            </h2>
+
+
+            <div class="menu-box">
+
+                <a href="reports_main.html"
+                   class="menu-button"
+                   data-description="در این بخش می‌توانید جلسات برگزارشده و اطلاعات مربوط به هر جلسه را مشاهده کنید.">
+                    گزارش جلسات
+                </a>
+
+                <a href="charter.html"
+                   class="menu-button"
+                   data-description="متن و ساختار اساسنامه، مواد، تبصره‌ها و بخش‌های مختلف آن در این قسمت قرار می‌گیرد.">
+                    اساسنامه
+                </a>
+
+                <a href="members.html"
+                   class="menu-button"
+                   data-description="اطلاعات مربوط به اعضای هیئت و نقش‌ها و مسئولیت‌های هر یک در این بخش قرار دارد.">
+                    اعضا
+                </a>
+
+                <a href="decisions.html"
+                   class="menu-button"
+                   data-description="مصوبات و تصمیمات ثبت‌شده در جلسات را می‌توانید از این قسمت مشاهده و پیگیری کنید.">
+                    مصوبات
+                </a>
+
+                <a href="tasks.html"
+                   class="menu-button"
+                   data-description="وظایف و کارهایی که در جلسات تعیین شده‌اند و وضعیت انجام آن‌ها در این بخش قرار می‌گیرد.">
+                    وظایف
+                </a>
+
+                <a href="search.html"
+                   class="menu-button"
+                   data-description="برای پیدا کردن سریع جلسه، مصوبه، عضو، موضوع یا بخش موردنظر از جستجو استفاده کنید.">
+                    جستجو
+                </a>
+
+            </div>
+
+
+            <!-- باکس توضیحات -->
+
+            <div class="menu-description" id="menuDescription">
+                <span id="descriptionText"></span>
+            </div>
+
+        </section>
+
+        <div class="dummy-content">
+
+            <p>
+                محتوای اصلی سایت در این قسمت قرار می‌گیرد.
+            </p>
+
+            <br><br>
+
+            <p>
+                با اسکرول کردن، لوگو از بالا خارج می‌شود
+                و عنوان در بالای صفحه باقی می‌ماند.
+            </p>
+
+            <br><br><br><br><br><br><br><br><br><br>
+
+            <p>
+                ادامه محتوای سایت...
+            </p>
+
+        </div>
+    </main>
+
+    <script>
+
+        let descriptionTimer;
+
+        const buttons =
+        document.querySelectorAll(".menu-button");
+
+        const descriptionBox =
+        document.getElementById("menuDescription");
+
+        const descriptionText =
+        document.getElementById("descriptionText");
+
+
+        /* =========================
+        نمایش توضیح
+        ========================= */
+
+        function showDescription(button) {
+
+        clearTimeout(descriptionTimer);
+
+        const text =
+        button.getAttribute("data-description");
+
+        descriptionText.textContent = text;
+
+        descriptionBox.classList.add("active");
+        }
+
+
+        /* =========================
+        مخفی کردن توضیح
+        ========================= */
+
+        function hideDescription() {
+
+        clearTimeout(descriptionTimer);
+
+        descriptionTimer = setTimeout(function () {
+
+        descriptionBox.classList.remove("active");
+
+        }, 800);
+        }
+
+
+        /* =========================
+        کامپیوتر
+        ========================= */
+
+        buttons.forEach(function(button) {
+
+        button.addEventListener("mouseenter", function() {
+
+        showDescription(button);
+
+        });
+
+        });
+
+
+        /* =========================
+        موبایل
+        لمس اول = توضیح
+        لمس دوم = ورود به صفحه
+        ========================= */
+
+        buttons.forEach(function(button) {
+
+        button.addEventListener("click", function(event) {
+
+        if (window.innerWidth <= 600) {
+
+        const alreadySelected =
+        button.classList.contains("selected");
+
+        if (!alreadySelected) {
+
+        event.preventDefault();
+
+        buttons.forEach(function(item) {
+        item.classList.remove("selected");
+        });
+
+        button.classList.add("selected");
+
+        showDescription(button);
+        }
+
+        }
+
+        });
+
+        });
+
+
+        /* =========================
+        خروج موس از بخش
+        ========================= */
+
+        const menuSection =
+        document.querySelector(".menu-section");
+
+
+        menuSection.addEventListener(
+        "mouseleave",
+        hideDescription
+        );
+
+    </script>
+
+</body>
+
+</html>
