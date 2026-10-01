@@ -40,7 +40,7 @@
 			"id": "member-005",
 			"name": "عرفان",
 			"family_name": "عظیمی",
-			"display_name": "سردار",
+			"display_name": "عرفان عظیمی",
 			"role": "member",
 			"active": true,
 			"sort_order": 5
@@ -49,10 +49,127 @@
 			"id": "member-006",
 			"name": "نیما",
 			"family_name": "قضاوی",
-			"display_name": "پیر میکده",
+			"display_name": "نیما قضاوی",
 			"role": "member",
 			"active": true,
 			"sort_order": 6
+		},
+		{
+			"id": "member-007",
+			"name": "علی",
+			"family_name": "محمدزاده",
+			"display_name": "علی محمدزاده",
+			"role": "member",
+			"active": true,
+			"sort_order": 7
+		},
+		{
+			"id": "member-008",
+			"name": "محمدصدرا",
+			"family_name": "صادقی",
+			"display_name": "صدرا صادقی",
+			"role": "member",
+			"active": true,
+			"sort_order": 8
+		},
+		{
+			"id": "member-009",
+			"name": "رضا",
+			"family_name": "خلیلیان",
+			"display_name": "رضا خلیلیان",
+			"role": "member",
+			"active": true,
+			"sort_order": 9
+		},
+		{
+			"id": "member-010",
+			"name": "حامد",
+			"family_name": "حدادی‌پور",
+			"display_name": "حامد حدادی‌پور",
+			"role": "member",
+			"active": true,
+			"sort_order": 10
+		},
+		{
+			"id": "member-011",
+			"name": "محمد",
+			"family_name": "نصر",
+			"display_name": "محمد نصر",
+			"role": "member",
+			"active": true,
+			"sort_order": 11
+		},
+		{
+			"id": "member-012",
+			"name": "مهدی",
+			"family_name": "سعیدی",
+			"display_name": "مهدی سعیدی",
+			"role": "member",
+			"active": true,
+			"sort_order": 12
+		},
+		{
+			"id": "member-013",
+			"name": "سروش",
+			"family_name": "بدیهی",
+			"display_name": "سروش بدیهی",
+			"role": "member",
+			"active": true,
+			"sort_order": 13
+		},
+		{
+			"id": "member-014",
+			"name": "محمد",
+			"family_name": "نریمانی منش",
+			"display_name": "محمد نریمانی",
+			"role": "member",
+			"active": true,
+			"sort_order": 14
+		},
+		{
+			"id": "member-015",
+			"name": "محسن",
+			"family_name": "معظم",
+			"display_name": "محسن معظم",
+			"role": "member",
+			"active": true,
+			"sort_order": 15
+		},
+		{
+			"id": "member-016",
+			"name": "علیرضا",
+			"family_name": "باقرزاده",
+			"display_name": "علیرضا باقرزاده",
+			"role": "member",
+			"active": true,
+			"sort_order": 16
+		},
+		{
+			"id": "member-017",
+			"name": "محمدجواد",
+			"family_name": "حدادی‌پور",
+			"display_name": "محمد جواد",
+			"role": "member",
+			"active": true,
+			"sort_order": 17
+		},
+		{
+			"id": "member-018",
+			"name": "محمدامین",
+			"family_name": "قاسمی",
+			"display_name": "امین قاسمی",
+			"role": "member",
+			"active": true,
+			"sort_order": 18
+		},
+		{
+			"id": "member-019",
+			"name": "مهدی",
+			"family_name": "اشرافی",
+			"display_name": "مهدی اشرافی",
+			"role": "member",
+			"active": true,
+			"sort_order": 19
 		}
 	]
 }

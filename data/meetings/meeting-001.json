@@ -1,22 +1,22 @@
 {
 	"id": "meeting-001",
-	"name": "مالی  پریم فاطمیه",
+	"name": "افتتاحیه‌ی گعده هیئت تراز",
 
 	"datetime": {
 		"date_gregorian": "2026-09-25",
 		"date_solar": "1405-07-03",
-		"date_lunar": "1448-04-03",
+		"date_lunar": "1448-04-13",
 
-		"start_time": "18:30",
-		"end_time": "21:15",
+		"start_time": "09:17",
+		"end_time": "10:23",
 
 		"interruptions": [
 			{
-				"duration_minutes": 20
+				"duration_minutes": 10
 			}
 		],
 
-		"total_interruption_minutes": 20
+		"total_interruption_minutes": 10
 	},
 
 	"moderator": "member-001",
@@ -28,27 +28,71 @@
 		},
 		{
 			"member": "member-002",
-			"status": "late_15"
+			"status": "present"
 		},
 		{
 			"member": "member-003",
-			"status": "late"
+			"status": "present"
 		},
 		{
 			"member": "member-004",
-			"status": "absent"
+			"status": "present"
+		},
+		{
+			"member": "member-005",
+			"status": "present"
+		},
+		{
+			"member": "member-006",
+			"status": "present"
+		},
+		{
+			"member": "member-007",
+			"status": "present"
+		},
+		{
+			"member": "member-008",
+			"status": "present"
+		},
+		{
+			"member": "member-009",
+			"status": "present"
+		},
+		{
+			"member": "member-010",
+			"status": "present"
+		},
+		{
+			"member": "member-011",
+			"status": "late"
+		},
+		{
+			"member": "member-012",
+			"status": "present"
+		},
+		{
+			"member": "member-013",
+			"status": "present"
+		},
+		{
+			"member": "member-014",
+			"status": "present"
+		},
+		{
+			"member": "member-015",
+			"status": "present"
 		}
 	],
 
-	"secretary": "member-005",
+	"secretary": "member-008",
 
 	"topics": [
-		"بررسی برنامه مراسم",
-		"بررسی بودجه",
-		"تقسیم مسئولیت‌ها"
+		"تشریح تغییرات هیئت",
+		"ترسیم مسیر استخراج مشخصات هیئت",
+		"اعلام آمادگی"
 	],
 
-	"description": "شرح کلی مباحث مطرح‌شده در جلسه در این قسمت نوشته می‌شود.",
+	"description": "جلسه را حاج‌آقای حقیقت با بیان دعوت دوستان از ایشان برای قرارگیری در رأس هیئت آغاز کردند. دعوتی که قبل از آن، صحبت‌هایی با ارکان مجموعه و شورای راهبردی هیئت برگزار شد تا به‌عنوان یک تغییر بزرگ، با بقیه بخش‌های مجموعه و مسجد هماهنگ باشد.\n",
 
 	"minutes": "صورت جلسه و نتیجه مباحث در این قسمت نوشته می‌شود.",
 
