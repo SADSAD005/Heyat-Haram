@@ -19,7 +19,10 @@
       "status": "completed",
 
       "sources": [
-        
+        {
+          "type": "png",
+          "url": "task_sources/task-001_source/task-001_member-001.png"
+        }
       ]
     },
     {
