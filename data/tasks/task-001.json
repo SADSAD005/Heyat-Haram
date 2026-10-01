@@ -20,7 +20,7 @@
 
       "sources": [
         {
-          "type": "png",
+          "type": "image",
           "url": "task_sources/task-001_source/task-001_member-001.png"
         }
       ]
