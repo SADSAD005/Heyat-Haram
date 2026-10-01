@@ -82,10 +82,13 @@
     {
       "member": "member-008",
       "responsibility": "دیدار سال ۱۴۰۲",
-      "status": "pending",
+      "status": "completed",
 
       "sources": [
-        
+        {
+          "type": "image",
+          "url": "task_sources/task-001_source/task-001_member-008.png"
+        }
       ]
     },
     {
