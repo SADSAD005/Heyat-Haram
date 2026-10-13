@@ -1,0 +1,185 @@
+{
+    "id": "task-002",
+    "number": 2,
+    "name": "بررسی سخنرانی‌های رهبر شهید در دیدار با مداحان",
+
+    "type": "study",
+
+    "description": "هر فرد یک سخنرانی طبق مصوب جلسه‌ی بخواند و خلاصه‌ای برای ارائه به دیگران ارائه کند.",
+
+    "registered_date": "1405-07-10",
+    "due_date": "1405-07-17",
+
+    "registered_by": "member-001",
+
+  "participants": [
+    {
+      "member": "member-001",
+      "responsibility": "دیدار سال ۱۳۷۳",
+      "status": "completed",
+    },
+    {
+      "member": "member-002",
+      "responsibility": "دیدار سال ۱۳۸۷",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-003",
+      "responsibility": "دیدار سال ۱۳۷۲",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-004",
+      "responsibility": "دیدار سال ۱۳۷۱",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-005",
+      "responsibility": "دیدار سال ۱۳۹۰",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-006",
+      "responsibility": "دیدار سال ۱۳۷۹",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-007",
+      "responsibility": "دیدار سال ۱۳۷۰",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-008",
+      "responsibility": "دیدار سال ۱۳۷۵",
+      "status": "completed",
+
+    },
+    {
+      "member": "member-009",
+      "responsibility": "دیدار سال ۱۳۸۴",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-010",
+      "responsibility": "دیدار سال ۱۳۷۴",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-011",
+      "responsibility": "دیدار سال ۱۳۷۷",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-012",
+      "responsibility": "دیدار سال ۱۳۶۹",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-013",
+      "responsibility": "دیدار سال ۱۳۷۶",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-014",
+      "responsibility": "دیدار سال ۱۳۸۹",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-016",
+      "responsibility": "دیدار سال ۱۳۷۸",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-017",
+      "responsibility": "دیدار سال ۱۳۸۰",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-018",
+      "responsibility": "دیدار سال ۱۳۸۲ و ۱۳۸۳",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    },
+    {
+      "member": "member-019",
+      "responsibility": "دیدار سال ۱۳۸۱",
+      "status": "completed",
+
+      "sources": [
+        
+      ]
+    }
+
+
+  ],
+
+    "final_sources": [
+        {
+            "type": "txt",
+            "url": "task_sources/task-001_source/task-001_member-005.txt"
+        },
+        {
+            "type": "text",
+            "content": "جمع‌بندی نهایی تکلیف در این قسمت قرار می‌گیرد."
+        }
+    ]
+}
