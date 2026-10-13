@@ -1,0 +1,32 @@
+{
+	"id": "task-003",
+	"number": 3,
+	"name": "پیگیری مکان مراسم فاطمیه",
+	"type": "follow_up",
+	"start_date": "1405-07-17",
+	"end_date": "1405-07-24",
+	"created_by": "member-001",
+	"description": "وضعیت منزل آقای حبیب الهیان توسط آقای نریمانی منش و وضعیت حسینیه‌ی امام جعفر صادق توسط آقایان ابراهیمیان و قضاوی مشخص شود. ",
+	"for": [
+		"member-002",
+		"member-014",
+		"member-006"
+	],
+	"comments": [
+		{
+			"author": "member-014",
+			"date": "1405-07-19",
+			"description": "مکان به این صورت است. حدود ۱۵۰ نفر ظرفیت دارد. از دو سمت دسترسی دارد.",
+			"source": {
+				"type": "image",
+				"url": "task_sources/task-003_source/task-003_member-014.png"
+			}
+		},
+		{
+			"author": "member-002",
+			"date": "1405-07-06",
+			"description": "یکی از مکان‌ها برای جمعه‌ها اعلام آمادگی کرد.",
+			"source": null
+		}
+	]
+}
