@@ -98,313 +98,151 @@
         بارگذاری جلسه
         ===================================================== */
 
-        async function loadMeeting() {
+/* =====================================================
+   بارگذاری جلسه از Supabase
+   ===================================================== */
 
-        if (!meetingId) {
-
-        document.getElementById(
-        "meetingTitle"
-        ).textContent =
-        "شناسه جلسه مشخص نشده است.";
-
+async function loadMeeting() {
+    if (!meetingId) {
+        document.getElementById("meetingTitle").textContent =
+            "شناسه جلسه مشخص نشده است.";
         return;
+    }
+
+    try {
+        if (!window.supabase || !window.supabase.createClient) {
+            throw new Error("کتابخانه Supabase بارگذاری نشده است.");
         }
 
+        if (typeof supabaseClient === "undefined") {
+            throw new Error("اتصال Supabase در دسترس نیست.");
+        }
 
-        try {
+        const [meetingResult, membersResponse] = await Promise.all([
+            supabaseClient
+                .from("meetings")
+                .select("id, data")
+                .eq("id", meetingId)
+                .maybeSingle(),
 
-        const [
-        meetingResponse,
-        membersResponse
-        ] =
-        await Promise.all([
-
-        fetch(
-        `data/meetings/${encodeURIComponent(meetingId)}.json`
-        ),
-
-        fetch(
-        "data/members.json"
-        )
-
+            fetch("data/members.json")
         ]);
 
-
-        if (!meetingResponse.ok) {
-
-        throw new Error(
-        "فایل جلسه پیدا نشد."
-        );
+        if (meetingResult.error) {
+            throw meetingResult.error;
         }
 
+        if (!meetingResult.data) {
+            throw new Error("گزارش جلسه در Supabase پیدا نشد.");
+        }
 
         if (!membersResponse.ok) {
-
-        throw new Error(
-        "فایل اعضا پیدا نشد."
-        );
+            throw new Error("فایل اعضا پیدا نشد.");
         }
 
+        const meeting = {
+            ...meetingResult.data.data,
+            id: meetingResult.data.id
+        };
 
-        const meeting =
-        await meetingResponse.json();
+        const membersData = await membersResponse.json();
+        const members = membersData.members || [];
 
+        /* عنوان جلسه */
+        let meetingNumber = meeting.id
+            ? meeting.id.replace("meeting-", "")
+            : "";
 
-        const membersData =
-        await membersResponse.json();
+        const parsedMeetingNumber = parseInt(meetingNumber, 10);
 
-
-        const members =
-        membersData.members || [];
-
-
-
-        /* =========================
-        عنوان جلسه
-        ========================= */
-
-        let meetingNumber =
-        meeting.id
-        ? meeting.id.replace(
-        "meeting-",
-        ""
-        )
-        : "";
-
-
-        const parsedMeetingNumber =
-        parseInt(
-        meetingNumber,
-        10
-        );
-
-
-        meetingNumber =
-        Number.isNaN(
-        parsedMeetingNumber
-        )
-        ? ""
-        : String(
-        parsedMeetingNumber
-        );
-
+        meetingNumber = Number.isNaN(parsedMeetingNumber)
+            ? ""
+            : String(parsedMeetingNumber);
 
         const meetingTitle =
-        meeting.name &&
-        meeting.name.trim() !== ""
-        ? meeting.name.trim()
-        : `جلسه شماره ${toPersianDigits(meetingNumber)}`;
+            meeting.name && meeting.name.trim() !== ""
+                ? meeting.name.trim()
+                : `جلسه شماره ${toPersianDigits(meetingNumber)}`;
 
+        document.getElementById("meetingTitle").textContent =
+            meetingTitle;
 
-        document.getElementById(
-        "meetingTitle"
-        ).textContent =
-        meetingTitle;
+        /* تاریخ هدر */
+        document.getElementById("meetingDate").textContent =
+            toPersianDigits(meeting.datetime?.date_solar || "-");
 
+        /* تاریخ و زمان */
+        document.getElementById("solarDate").textContent =
+            toPersianDigits(meeting.datetime?.date_solar || "-");
 
+        document.getElementById("lunarDate").textContent =
+            toPersianDigits(meeting.datetime?.date_lunar || "-");
 
-        /* =========================
-        تاریخ هدر
-        ========================= */
+        document.getElementById("startTime").textContent =
+            toPersianDigits(meeting.datetime?.start_time || "-");
 
-        document.getElementById(
-        "meetingDate"
-        ).textContent =
-        toPersianDigits(
-        meeting.datetime?.date_solar || "-"
+        document.getElementById("endTime").textContent =
+            toPersianDigits(meeting.datetime?.end_time || "-");
+
+        /* مدت جلسه */
+        const totalDuration = timeDifference(
+            meeting.datetime?.start_time,
+            meeting.datetime?.end_time
         );
 
+        document.getElementById("totalDuration").textContent =
+            formatDuration(totalDuration);
 
-
-        /* =========================
-        تاریخ و زمان
-        ========================= */
-
-        document.getElementById(
-        "solarDate"
-        ).textContent =
-        toPersianDigits(
-        meeting.datetime?.date_solar || "-"
+        /* مدت مفید */
+        const interruptionMinutes = Number(
+            meeting.datetime?.total_interruption_minutes || 0
         );
 
-
-        document.getElementById(
-        "lunarDate"
-        ).textContent =
-        toPersianDigits(
-        meeting.datetime?.date_lunar || "-"
+        const usefulDuration = Math.max(
+            0,
+            totalDuration - interruptionMinutes
         );
 
+        document.getElementById("usefulDuration").textContent =
+            formatDuration(usefulDuration);
 
-        document.getElementById(
-        "startTime"
-        ).textContent =
-        toPersianDigits(
-        meeting.datetime?.start_time || "-"
-        );
+        /* اطلاعات جلسه */
+        renderTopics(meeting);
 
+        document.getElementById("description").textContent =
+            meeting.description || "-";
 
-        document.getElementById(
-        "endTime"
-        ).textContent =
-        toPersianDigits(
-        meeting.datetime?.end_time || "-"
-        );
+        document.getElementById("minutes").textContent =
+            meeting.minutes || "-";
 
+        renderModerator(meeting, members);
+        renderAttendees(meeting, members);
+        renderSecretary(meeting, members);
+        renderOpenTopics(meeting);
 
+        /* تکالیف: شناسه‌ها از جلسه خوانده می‌شوند */
+        await renderTasks(meeting, members);
 
-        /* =========================
-        مدت جلسه
-        ========================= */
+        /* اسناد */
+        renderDocuments(meeting);
 
-        const totalDuration =
-        timeDifference(
-        meeting.datetime?.start_time,
-        meeting.datetime?.end_time
-        );
+        /* تگ‌ها */
+        renderTags(meeting);
 
-
-        document.getElementById(
-        "totalDuration"
-        ).textContent =
-        formatDuration(
-        totalDuration
-        );
-
-                        /* =========================
-        مدت مفید
-        ========================= */
-
-        const interruptionMinutes =
-        Number(
-        meeting.datetime
-        ?.total_interruption_minutes || 0
-        );
-
-
-        const usefulDuration =
-        Math.max(
-        0,
-        totalDuration -
-        interruptionMinutes
-        );
-
-
-        document.getElementById(
-        "usefulDuration"
-        ).textContent =
-        formatDuration(
-        usefulDuration
-        );
-        /* =========================
-        اطلاعات جلسه
-        ========================= */
-
-        renderTopics(
-        meeting
-        );
-
-
-        document.getElementById(
-        "description"
-        ).textContent =
-        meeting.description ||
-        "-";
-
-
-        document.getElementById(
-        "minutes"
-        ).textContent =
-        meeting.minutes ||
-        "-";
-
-
-        renderModerator(
-        meeting,
-        members
-        );
-
-
-        renderAttendees(
-        meeting,
-        members
-        );
-
-
-        renderSecretary(
-        meeting,
-        members
-        );
-
-
-        renderOpenTopics(
-        meeting
-        );
-
-
-
-        /* =========================
-        تکالیف
-
-        مهم:
-        اینجا دیگر task object
-        نداریم؛ فقط ID داریم.
-        ========================= */
-
-        await renderTasks(
-        meeting,
-        members
-        );
-
-
-
-        /* =========================
-        اسناد
-        ========================= */
-
-        renderDocuments(
-        meeting
-        );
-
-
-
-        /* =========================
-        تگ‌ها
-        ========================= */
-
-        renderTags(
-        meeting
-        );
-
-
-
-        /* =========================
-        آکاردئون‌ها
-        ========================= */
-
+        /* آکاردئون‌ها */
         setupAccordions();
 
-        }
+    } catch (error) {
+        console.error("خطا در بارگذاری گزارش جلسه:", error);
 
-        catch (error) {
+        document.getElementById("meetingTitle").textContent =
+            "خطا در بارگذاری گزارش جلسه";
 
-        console.error(
-        error
-        );
+        document.getElementById("description").textContent =
+            error.message || "خطای نامشخصی رخ داده است.";
+    }
+}
 
-
-        document.getElementById(
-        "meetingTitle"
-        ).textContent =
-        "خطا در بارگذاری گزارش جلسه";
-
-
-        document.getElementById(
-        "description"
-        ).textContent =
-        error.message;
-        }
-        }
 
 
 
