@@ -2,804 +2,650 @@
 <html lang="fa" dir="rtl">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>گزارش جلسات</title>
 
-
     <style>
-
         * {
             box-sizing: border-box;
         }
 
-
         body {
-
             margin: 0;
-
             background: #000;
-
             color: #fff;
-
-            font-family:
-                Tahoma,
-                Arial,
-                sans-serif;
-
+            font-family: Tahoma, Arial, sans-serif;
             direction: rtl;
         }
-
 
         a {
             color: inherit;
             text-decoration: none;
         }
 
-
-        /* ---------------- HEADER ---------------- */
+        /* HEADER */
 
         .header {
-
             width: 100%;
             max-width: 900px;
-
             height: 90px;
-
             margin: 0 auto;
-
             background: #0e6136;
-
-            border-radius:
-                0 0 25px 25px;
-
+            border-radius: 0 0 25px 25px;
             display: flex;
-
             align-items: center;
-
             justify-content: center;
-
             font-size: 25px;
-
             font-weight: bold;
-
             position: sticky;
-
             top: 0;
-
             z-index: 1000;
         }
 
-
-        /* ---------------- MAIN ---------------- */
+        /* MAIN */
 
         .content {
-
             width: 90%;
-
             max-width: 900px;
-
             margin: 40px auto;
         }
 
-
-        /* ---------------- LATEST REPORT ---------------- */
+        /* LATEST REPORT */
 
         .latest-box {
-
+            display: block;
             border: 1px solid #333;
-
             border-radius: 20px;
-
             padding: 22px 25px;
-
             background: #080808;
+            transition: background 0.15s ease;
         }
 
+            .latest-box:hover {
+                background: #0b0b0b;
+            }
 
         .latest-label {
-
             color: #999;
-
             font-size: 14px;
-
             margin-bottom: 10px;
         }
 
-
         .latest-title {
-
             font-size: 22px;
-
             font-weight: bold;
-
             margin-bottom: 12px;
         }
 
-
         .latest-meta {
-
             color: #aaa;
-
             font-size: 14px;
-
             line-height: 2;
         }
 
-
-        /* ---------------- SEARCH ---------------- */
+        /* SEARCH */
 
         .search-box {
-
             width: 100%;
-
             height: 55px;
-
             border: 1px solid #333;
-
             border-radius: 16px;
-
             margin-top: 25px;
-
             display: flex;
-
             align-items: center;
-
             padding: 0 20px;
-
-            color: #777;
-
+            background: #080808;
+            color: #fff;
+            font-family: inherit;
             font-size: 16px;
+            outline: none;
         }
 
+            .search-box::placeholder {
+                color: #777;
+            }
 
-        /* ---------------- REPORT LIST ---------------- */
+            .search-box:focus {
+                border-color: #0e6136;
+            }
+
+        /* REPORT LIST */
 
         .reports-box {
-
             width: 100%;
-
             margin-top: 15px;
-
             border: 1px solid #333;
-
             border-radius: 20px;
-
             overflow-y: auto;
-
-            /*
-             * ارتفاع تقریبی برای ۱۰ جلسه
-             */
-
             height: 600px;
         }
 
-
         .report-row {
-
             min-height: 60px;
-
             padding: 0 20px;
-
             display: grid;
-
-            grid-template-columns:
-                1fr
-                2fr
-                1fr;
-
+            grid-template-columns: 1fr 2fr 1fr;
             align-items: center;
-
             gap: 15px;
-
             border-bottom: 1px solid #222;
-
-            transition:
-                background 0.15s ease;
+            transition: background 0.15s ease;
         }
 
+            .report-row:last-child {
+                border-bottom: none;
+            }
 
-        .report-row:last-child {
-            border-bottom: none;
-        }
-
-
-        .report-row:hover {
-            background: #0b0b0b;
-        }
-
+            .report-row:hover {
+                background: #0b0b0b;
+            }
 
         .report-title {
-
             font-weight: bold;
-
             color: #fff;
         }
 
-
         .report-topic {
-
             color: #ccc;
-
             overflow: hidden;
-
             text-overflow: ellipsis;
-
             white-space: nowrap;
         }
-
 
         .report-date {
-
             color: #999;
-
             text-align: left;
-
             white-space: nowrap;
         }
 
-
-        /* ---------------- EMPTY / ERROR ---------------- */
+        /* EMPTY / ERROR */
 
         .message {
-
             padding: 30px;
-
             text-align: center;
-
             color: #777;
-
             line-height: 2;
         }
 
-
-        /* ---------------- MOBILE ---------------- */
+        /* MOBILE */
 
         @media (max-width: 700px) {
-
             .header {
-
                 height: 75px;
-
                 font-size: 20px;
-
-                border-radius:
-                    0 0 20px 20px;
+                border-radius: 0 0 20px 20px;
             }
 
-
             .content {
-
                 width: 92%;
-
                 margin-top: 30px;
             }
 
-
             .latest-title {
-
                 font-size: 19px;
             }
 
-
             .reports-box {
-
                 height: 520px;
             }
 
-
             .report-row {
-
                 min-height: 65px;
-
-                padding:
-                    8px 15px;
-
-                grid-template-columns:
-                    1fr
-                    1.5fr
-                    auto;
-
+                padding: 8px 15px;
+                grid-template-columns: 1fr 1.5fr auto;
                 gap: 8px;
-
                 font-size: 13px;
             }
-
 
             .report-topic {
-
                 font-size: 13px;
             }
 
-
             .report-date {
-
                 font-size: 12px;
             }
-
         }
-
     </style>
-
 </head>
 
-
 <body>
-
-
-    <!-- HEADER -->
 
     <header class="header">
         گزارش جلسات
     </header>
 
-
     <main class="content">
-
 
         <!-- LATEST REPORT -->
 
-        <a
-            href="#"
-            id="latestReport"
-            class="latest-box"
-        >
-
+        <a href="#"
+           id="latestReport"
+           class="latest-box"
+           style="display: none;">
             <div class="latest-label">
                 آخرین گزارش
             </div>
 
+            <div class="latest-title" id="latestTitle"></div>
 
-            <div
-                class="latest-title"
-                id="latestTitle"
-            >
-                در حال بارگذاری...
-            </div>
-
-
-            <div
-                class="latest-meta"
-                id="latestMeta"
-            >
-            </div>
-
+            <div class="latest-meta" id="latestMeta"></div>
         </a>
-
 
         <!-- SEARCH -->
 
-        <div class="search-box">
-
-            جست‌وجو
-
-        </div>
-
+        <input type="search"
+               id="searchInput"
+               class="search-box"
+               placeholder="جست‌وجو در عنوان، موضوع یا تاریخ جلسه..."
+               aria-label="جست‌وجو در گزارش جلسات"
+               autocomplete="off">
 
         <!-- REPORTS -->
 
-        <div
-            class="reports-box"
-            id="reportsList"
-        >
-
+        <div class="reports-box" id="reportsList" aria-live="polite">
             <div class="message">
                 در حال بارگذاری گزارش‌ها...
             </div>
-
         </div>
-
 
     </main>
 
+    <!-- Supabase -->
 
-<script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase_client.js"></script>
 
+    <script>
+        "use strict";
 
-    /* ----------------------------------------
-       تبدیل اعداد انگلیسی به فارسی
-       ---------------------------------------- */
+        let allMeetings = [];
 
-    function toPersianDigits(value) {
+        /* ----------------------------------------
+        تبدیل اعداد انگلیسی به فارسی
+        ---------------------------------------- */
 
-        if (
-            value === null ||
-            value === undefined
-        ) {
-            return "";
+        function toPersianDigits(value) {
+        if (value === null || value === undefined) {
+        return "";
         }
-
 
         return String(value).replace(
-            /\d/g,
-            digit => "۰۱۲۳۴۵۶۷۸۹"[digit]
+        /\d/g,
+        digit => "۰۱۲۳۴۵۶۷۸۹"[Number(digit)]
         );
-    }
-
-
-    /* ----------------------------------------
-       فرار دادن HTML
-       ---------------------------------------- */
-
-    function escapeHtml(value) {
-
-        if (
-            value === null ||
-            value === undefined
-        ) {
-            return "";
         }
 
+        /* ----------------------------------------
+        فرار دادن HTML
+        ---------------------------------------- */
+
+        function escapeHtml(value) {
+        if (value === null || value === undefined) {
+        return "";
+        }
 
         return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+        }
 
-            .replace(
-                /&/g,
-                "&amp;"
-            )
+        /* ----------------------------------------
+        نرمال‌سازی متن جست‌وجو
+        ---------------------------------------- */
 
-            .replace(
-                /</g,
-                "&lt;"
-            )
+        function normalizeText(value) {
+        return String(value ?? "")
+        .toLowerCase()
+        .replace(/[يى]/g, "ی")
+        .replace(/ك/g, "ک")
+        .replace(/[\u064B-\u065F\u0670]/g, "")
+        .replace(/[۰-۹]/g, digit =>
+        String("۰۱۲۳۴۵۶۷۸۹".indexOf(digit))
+        )
+        .replace(/[٠-٩]/g, digit =>
+        String("٠١٢٣٤٥٦٧٨٩".indexOf(digit))
+        )
+        .trim();
+        }
 
-            .replace(
-                />/g,
-                "&gt;"
-            )
+        /* ----------------------------------------
+        گرفتن شماره جلسه از شناسه
+        ---------------------------------------- */
 
-            .replace(
-                /"/g,
-                "&quot;"
-            )
-
-            .replace(
-                /'/g,
-                "&#039;"
-            );
-    }
-
-
-    /* ----------------------------------------
-       گرفتن شماره جلسه
-       ---------------------------------------- */
-
-    function getMeetingNumber(meeting) {
-
-        const raw =
-            meeting.id
-                ? meeting.id.replace(
-                    /^meeting-/,
-                    ""
-                )
-                : "";
-
+        function getMeetingNumber(meeting) {
+        const raw = meeting?.id
+        ? String(meeting.id).replace(/^meeting-/i, "")
+        : "";
 
         if (/^\d+$/.test(raw)) {
-
-            return String(
-                parseInt(
-                    raw,
-                    10
-                )
-            );
+        return String(parseInt(raw, 10));
         }
-
 
         return raw;
-    }
-
-
-    /* ----------------------------------------
-       عنوان جلسه
-       ---------------------------------------- */
-
-    function getMeetingTitle(meeting) {
-
-        if (
-            meeting.name &&
-            meeting.name.trim() !== ""
-        ) {
-
-            return meeting.name.trim();
         }
 
+        /* ----------------------------------------
+        عنوان جلسه
+        ---------------------------------------- */
 
-        const number =
-            getMeetingNumber(meeting);
+        function getMeetingTitle(meeting) {
+        if (
+        typeof meeting?.name === "string" &&
+        meeting.name.trim() !== ""
+        ) {
+        return meeting.name.trim();
+        }
 
+        const number = getMeetingNumber(meeting);
 
-        return `جلسه شماره ${toPersianDigits(number)}`;
-    }
+        return number
+        ? `جلسه شماره ${toPersianDigits(number)}`
+        : "جلسه بدون عنوان";
+        }
 
+        /* ----------------------------------------
+        تاریخ جلسه
+        ---------------------------------------- */
 
-    /* ----------------------------------------
-       مرتب‌سازی جلسات
-       جدیدترین → قدیمی‌ترین
-       ---------------------------------------- */
-
-    function sortMeetings(meetings) {
-
-        return meetings.sort(
-            (a, b) => {
-
-                const numberA =
-                    parseInt(
-                        getMeetingNumber(a),
-                        10
-                    ) || 0;
-
-
-                const numberB =
-                    parseInt(
-                        getMeetingNumber(b),
-                        10
-                    ) || 0;
-
-
-                return numberB - numberA;
-            }
+        function getMeetingDate(meeting) {
+        return (
+        meeting?.datetime?.date_solar ||
+        meeting?.datetime?.date_gregorian ||
+        ""
         );
-    }
+        }
 
+        /* ----------------------------------------
+        مرتب‌سازی جلسات
+        تاریخ جدیدتر اول؛ شماره جلسه در صورت
+        یکسان بودن تاریخ، معیار بعدی است.
+        ---------------------------------------- */
 
-    /* ----------------------------------------
-       ساخت یک ردیف گزارش
-       ---------------------------------------- */
+        function sortMeetings(meetings) {
+        return meetings.sort((a, b) => {
+        const dateA = String(
+        a?.datetime?.date_gregorian || ""
+        );
 
-    function createReportRow(meeting) {
+        const dateB = String(
+        b?.datetime?.date_gregorian || ""
+        );
 
-        const link =
-            document.createElement("a");
+        if (dateA && dateB && dateA !== dateB) {
+        return dateB.localeCompare(dateA);
+        }
 
+        if (dateA && !dateB) {
+        return -1;
+        }
 
-        link.className =
-            "report-row";
+        if (!dateA && dateB) {
+        return 1;
+        }
 
+        const numberA = parseInt(
+        getMeetingNumber(a),
+        10
+        ) || 0;
+
+        const numberB = parseInt(
+        getMeetingNumber(b),
+        10
+        ) || 0;
+
+        if (numberA !== numberB) {
+        return numberB - numberA;
+        }
+
+        return String(b?.id || "").localeCompare(
+        String(a?.id || ""),
+        undefined,
+        { numeric: true }
+        );
+        });
+        }
+
+        /* ----------------------------------------
+        استخراج موضوعات جلسه
+        ---------------------------------------- */
+
+        function getMeetingTopics(meeting) {
+        if (!Array.isArray(meeting?.topics)) {
+        return [];
+        }
+
+        return meeting.topics
+        .filter(topic =>
+        typeof topic === "string" &&
+        topic.trim() !== ""
+        );
+        }
+
+        /* ----------------------------------------
+        ساخت ردیف گزارش
+        ---------------------------------------- */
+
+        function createReportRow(meeting) {
+        const link = document.createElement("a");
+
+        link.className = "report-row";
 
         link.href =
-            `report_viewer.html?id=${encodeURIComponent(meeting.id)}`;
+        `report_viewer.html?id=${encodeURIComponent(meeting.id)}`;
 
-
-        const title =
-            getMeetingTitle(meeting);
-
-
-        const firstTopic =
-            meeting.topics &&
-            meeting.topics.length
-                ? meeting.topics[0]
-                : "-";
-
-
-        const date =
-            meeting.datetime?.date_solar ||
-            "-";
-
+        const title = getMeetingTitle(meeting);
+        const topics = getMeetingTopics(meeting);
+        const firstTopic = topics[0] || "بدون موضوع ثبت‌شده";
+        const date = getMeetingDate(meeting) || "—";
 
         link.innerHTML = `
+        <div class="report-title">
+        ${escapeHtml(title)}
+        </div>
 
-            <div class="report-title">
-                ${escapeHtml(title)}
-            </div>
+        <div class="report-topic" title="${escapeHtml(firstTopic)}">
+        ${escapeHtml(firstTopic)}
+        </div>
 
-            <div class="report-topic">
-                ${escapeHtml(firstTopic)}
-            </div>
-
-            <div class="report-date">
-                ${toPersianDigits(date)}
-            </div>
-
+        <div class="report-date">
+        ${escapeHtml(toPersianDigits(date))}
+        </div>
         `;
-
 
         return link;
-    }
+        }
 
+        /* ----------------------------------------
+        نمایش آخرین گزارش
+        ---------------------------------------- */
 
-    /* ----------------------------------------
-       نمایش آخرین گزارش
-       ---------------------------------------- */
+        function renderLatest(meeting) {
+        const latestLink = document.getElementById("latestReport");
 
-    function renderLatest(meeting) {
+        if (!meeting) {
+        latestLink.style.display = "none";
+        return;
+        }
 
-        const latestLink =
-            document.getElementById(
-                "latestReport"
-            );
-
-
-        const title =
-            getMeetingTitle(meeting);
-
-
-        const firstTopic =
-            meeting.topics &&
-            meeting.topics.length
-                ? meeting.topics[0]
-                : "-";
-
-
-        const date =
-            meeting.datetime?.date_solar ||
-            "-";
-
+        const title = getMeetingTitle(meeting);
+        const topics = getMeetingTopics(meeting);
+        const firstTopic = topics[0] || "بدون موضوع ثبت‌شده";
+        const date = getMeetingDate(meeting) || "تاریخ ثبت نشده";
 
         latestLink.href =
-            `report_viewer.html?id=${encodeURIComponent(meeting.id)}`;
+        `report_viewer.html?id=${encodeURIComponent(meeting.id)}`;
 
+        document.getElementById("latestTitle").textContent = title;
 
-        document.getElementById(
-            "latestTitle"
-        ).textContent =
-            title;
-
-
-        document.getElementById(
-            "latestMeta"
-        ).innerHTML = `
-
-            ${escapeHtml(firstTopic)}
-
-            <br>
-
-            ${toPersianDigits(date)}
-
+        document.getElementById("latestMeta").innerHTML = `
+        ${escapeHtml(firstTopic)}
+        <br>
+        ${escapeHtml(toPersianDigits(date))}
         `;
-    }
 
+        latestLink.style.display = "block";
+        }
 
-    /* ----------------------------------------
-       بارگذاری گزارش‌ها
-       ---------------------------------------- */
+        /* ----------------------------------------
+        نمایش فهرست جلسات
+        ---------------------------------------- */
 
-    async function loadReports() {
+        function renderMeetings(meetings) {
+        const list = document.getElementById("reportsList");
 
-        const list =
-            document.getElementById(
-                "reportsList"
-            );
+        list.innerHTML = "";
 
+        if (!meetings.length) {
+        list.innerHTML = `
+        <div class="message">
+        گزارشی مطابق جست‌وجوی شما پیدا نشد.
+        </div>
+        `;
+        return;
+        }
+
+        const fragment = document.createDocumentFragment();
+
+        meetings.forEach(meeting => {
+        fragment.appendChild(createReportRow(meeting));
+        });
+
+        list.appendChild(fragment);
+        }
+
+        /* ----------------------------------------
+        جست‌وجو در جلسات
+        ---------------------------------------- */
+
+        function filterMeetings() {
+        const query = normalizeText(
+        document.getElementById("searchInput").value
+        );
+
+        if (!query) {
+        renderMeetings(allMeetings);
+        return;
+        }
+
+        const filteredMeetings = allMeetings.filter(meeting => {
+        const searchableText = [
+        getMeetingTitle(meeting),
+        getMeetingNumber(meeting),
+        getMeetingDate(meeting),
+        meeting?.datetime?.date_gregorian,
+        ...getMeetingTopics(meeting)
+        ].join(" ");
+
+        return normalizeText(searchableText).includes(query);
+        });
+
+        renderMeetings(filteredMeetings);
+        }
+
+        /* ----------------------------------------
+        بارگذاری جلسات از Supabase
+        ---------------------------------------- */
+
+        async function loadReports() {
+        const list = document.getElementById("reportsList");
 
         try {
+        if (
+        typeof supabaseClient === "undefined" ||
+        !supabaseClient
+        ) {
+        throw new Error(
+        "اتصال Supabase برقرار نشده است. فایل js/supabase_client.js را بررسی کنید."
+        );
+        }
 
-            /* ------------------------------
-               خواندن فهرست جلسات
-               ------------------------------ */
+        const { data, error } = await supabaseClient
+        .from("meetings")
+        .select("id, data");
 
-            const indexResponse =
-                await fetch(
-                    "data/meetings/index.json"
-                );
+        if (error) {
+        throw error;
+        }
 
+        allMeetings = (data || [])
+        .filter(row => row && row.data)
+        .map(row => ({
+        ...row.data,
+        id: row.id
+        }));
 
-            if (!indexResponse.ok) {
+        sortMeetings(allMeetings);
 
-                throw new Error(
-                    "فایل index.json پیدا نشد."
-                );
-            }
+        if (!allMeetings.length) {
+        renderLatest(null);
 
+        list.innerHTML = `
+        <div class="message">
+        هنوز گزارشی ثبت نشده است.
+        </div>
+        `;
 
-            const index =
-                await indexResponse.json();
+        return;
+        }
 
-
-            const meetingIds =
-                index.meetings || [];
-
-
-            if (!meetingIds.length) {
-
-                list.innerHTML = `
-                    <div class="message">
-                        هنوز گزارشی ثبت نشده است.
-                    </div>
-                `;
-
-                return;
-            }
-
-
-            /* ------------------------------
-               خواندن تمام جلسات
-               ------------------------------ */
-
-            const responses =
-                await Promise.all(
-
-                    meetingIds.map(
-                        id =>
-                            fetch(
-                                `data/meetings/${id}.json`
-                            )
-                    )
-                );
-
-
-            const meetings =
-                await Promise.all(
-
-                    responses.map(
-                        response =>
-                            response.json()
-                    )
-                );
-
-
-            /* ------------------------------
-               مرتب‌سازی
-               ------------------------------ */
-
-            sortMeetings(
-                meetings
-            );
-
-
-            /* ------------------------------
-               آخرین گزارش
-               ------------------------------ */
-
-            renderLatest(
-                meetings[0]
-            );
-
-
-            /* ------------------------------
-               لیست گزارش‌ها
-               ------------------------------ */
-
-            list.innerHTML =
-                "";
-
-
-            meetings.forEach(
-                meeting => {
-
-                    list.appendChild(
-                        createReportRow(
-                            meeting
-                        )
-                    );
-
-                }
-            );
-
+        renderLatest(allMeetings[0]);
+        renderMeetings(allMeetings);
 
         } catch (error) {
+        console.error(
+        "خطا در بارگذاری گزارش‌ها از Supabase:",
+        error
+        );
 
-            console.error(error);
+        renderLatest(null);
 
+        list.innerHTML = `
+        <div class="message">
+        خطا در بارگذاری گزارش‌ها
+        <br>
+        ${escapeHtml(
+        error?.message ||
+        "خطای نامشخصی رخ داده است."
+        )}
+        <br>
+        <button
+        id="retryButton"
+        type="button"
+        style="
+        margin-top: 15px;
+        padding: 10px 20px;
+        background: #0e6136;
+        color: #fff;
+        border: 0;
+        border-radius: 10px;
+        cursor: pointer;
+        font-family: inherit;
+        "
+        >
+        تلاش دوباره
+        </button>
+        `;
 
-            list.innerHTML = `
-
-                <div class="message">
-
-                    خطا در بارگذاری گزارش‌ها
-
-                    <br>
-
-                    ${escapeHtml(error.message)}
-
-                </div>
-
-            `;
+        document
+        .getElementById("retryButton")
+        ?.addEventListener("click", loadReports);
         }
-    }
+        }
 
+        /* ----------------------------------------
+        راه‌اندازی صفحه
+        ---------------------------------------- */
 
-    loadReports();
+        document
+        .getElementById("searchInput")
+        .addEventListener("input", filterMeetings);
 
-</script>
-
+        loadReports();
+    </script>
 
 </body>
-
 </html>
