@@ -1,0 +1,665 @@
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #000;
+            color: #d2d4b4;
+            font-family: Tahoma, Arial, sans-serif;
+            direction: rtl;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+
+        /* ==============================
+           HEADER
+        ============================== */
+
+        .header {
+            width: 100%;
+            max-width: 900px;
+            height: 90px;
+            margin: 0 auto;
+            background: #0e6136;
+            border-radius: 0 0 25px 25px;
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            gap: 30px;
+            overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .logo {
+            width: 75px;
+            height: auto;
+            display: block;
+        }
+
+        .meeting-title {
+            flex: 1;
+            font-size: 25px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 1.5;
+            white-space: nowrap;
+        }
+
+        .meeting-date {
+            min-width: 130px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+
+        /* ==============================
+           MAIN
+        ============================== */
+
+        .content {
+            width: 90%;
+            max-width: 900px;
+            margin: 50px auto;
+        }
+
+
+        /* ==============================
+           DATE BOX
+        ============================== */
+
+        .date-box {
+            width: 100%;
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            overflow: hidden;
+        }
+
+        .date-item {
+            min-height: 95px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-left: 1px solid #333;
+            text-align: center;
+        }
+
+            .date-item:last-child {
+                border-left: none;
+            }
+
+        .date-label {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .date-value {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+
+        /* ==============================
+           SECTIONS
+        ============================== */
+
+        .section {
+            margin-top: 35px;
+        }
+
+        .section-title {
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .topics {
+            line-height: 2.2;
+            color: #ddd;
+            font-size: 16px;
+        }
+
+            .topics span {
+                white-space: nowrap;
+            }
+
+        .separator {
+            width: 100%;
+            height: 1px;
+            background: #333;
+            margin: 30px 0;
+        }
+
+
+        /* ==============================
+           DESCRIPTION
+        ============================== */
+
+        .description {
+            color: #ddd;
+            line-height: 2.2;
+            font-size: 16px;
+            white-space: pre-line;
+            text-align: justify;
+        }
+
+
+        /* ==============================
+           MEMBERS
+        ============================== */
+
+        .members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .member-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            max-width: 100%;
+            background: #d2d4b4;
+            color: #111;
+            padding: 6px 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            line-height: 1.5;
+            text-decoration: none;
+            text-align: center;
+            white-space: normal;
+            overflow-wrap: anywhere;
+            transition: transform 0.15s ease;
+        }
+
+            .member-link:hover {
+                transform: translateY(-2px);
+                text-decoration: none;
+            }
+
+        .member-label {
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+
+        /* ==============================
+           ACCORDION
+        ============================== */
+
+        .accordion {
+            width: 100%;
+            border: 1px solid #333;
+            border-radius: 18px;
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        .accordion-header {
+            min-height: 65px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            user-select: none;
+            background: #080808;
+        }
+
+        .accordion-title {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .arrow {
+            font-size: 18px;
+            transition: transform 0.2s ease;
+        }
+
+        .accordion.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .accordion.open .accordion-content {
+            display: block;
+        }
+
+
+        /* ==============================
+           TASKS
+        ============================== */
+
+        .task {
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 15px;
+        }
+
+            .task:last-child {
+                margin-bottom: 0;
+            }
+
+
+        /* عنوان تکلیف */
+
+        .task-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 7px;
+        }
+
+
+        /* شرح تکلیف */
+
+        .task-description {
+            color: #ccc;
+            line-height: 1.9;
+            font-size: 15px;
+            white-space: pre-line;
+            margin-top: 0;
+            margin-bottom: 14px;
+        }
+
+
+        /* مشخصات تکلیف */
+
+        .task-meta {
+            width: 100%;
+            min-height: 42px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #aaa;
+            font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+            .task-meta strong {
+                color: #d2d4b4;
+                font-weight: bold;
+            }
+
+        .task-meta-separator {
+            color: #555;
+        }
+
+        /* ==============================
+   FOLLOW-UP TASK
+============================== */
+
+        .follow-up-meta {
+            flex-wrap: wrap;
+            white-space: normal;
+            height: auto;
+            overflow: visible;
+            row-gap: 8px;
+        }
+
+        .follow-up-assignees {
+            margin-top: 18px;
+        }
+
+        .follow-up-section-title {
+            font-size: 15px;
+            font-weight: bold;
+            color: #d2d4b4;
+        }
+
+        .follow-up-member-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+            .follow-up-member-list a,
+            .follow-up-comment-author a {
+                text-decoration: none;
+            }
+
+        .follow-up-comments {
+            margin-top: 22px;
+        }
+
+        .follow-up-comments-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .follow-up-comments-count {
+            color: #aaa;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .follow-up-comment {
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 10px;
+        }
+
+            .follow-up-comment:last-child {
+                margin-bottom: 0;
+            }
+
+        .follow-up-comment-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        .follow-up-comment-date {
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        .follow-up-comment-author {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        .follow-up-comment-description {
+            color: #ddd;
+            font-size: 14px;
+            line-height: 2;
+            white-space: pre-line;
+            text-align: justify;
+            margin-top: 12px;
+        }
+
+        .follow-up-comment-source {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 12px;
+        }
+
+        .follow-up-empty {
+            color: #999;
+            font-size: 14px;
+            padding: 12px 0;
+        }
+
+        /* ==============================
+           TASK TABLE
+        ============================== */
+
+        .task-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-top: 18px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .task-table {
+            width: 100%;
+            min-width: 650px;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+            .task-table th,
+            .task-table td {
+                border-bottom: 1px solid #333;
+                padding: 11px 10px;
+                text-align: right;
+                vertical-align: middle;
+                font-size: 14px;
+            }
+
+            .task-table th {
+                color: #999;
+                font-weight: normal;
+                white-space: nowrap;
+            }
+
+            .task-table td {
+                color: #ddd;
+                line-height: 1.8;
+            }
+
+                .task-table th:nth-child(1),
+                .task-table td:nth-child(1) {
+                    width: 22%;
+                }
+
+                .task-table th:nth-child(2),
+                .task-table td:nth-child(2) {
+                    width: 38%;
+                }
+
+                .task-table th:nth-child(3),
+                .task-table td:nth-child(3) {
+                    width: 20%;
+                }
+
+                .task-table th:nth-child(4),
+                .task-table td:nth-child(4) {
+                    width: 20%;
+                }
+
+
+        /* وضعیت */
+
+        .task-status {
+            white-space: nowrap;
+        }
+
+
+        /* سورس */
+
+        .source-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 55px;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+            .source-badge.has-source {
+                background: #d2d4b4;
+                color: #111;
+            }
+
+            .source-badge.no-source {
+                background: #222;
+                color: #777;
+                border: 1px solid #333;
+            }
+
+
+        /* ==============================
+           DOCUMENTS
+        ============================== */
+
+        .documents {
+            color: #ccc;
+            line-height: 2;
+        }
+
+
+        /* ==============================
+           TAGS
+        ============================== */
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            color: #d2d4b4;
+            border: 1px solid #d2d4b4;
+            border-radius: 20px;
+            padding: 6px 14px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+            .tag:hover {
+                text-decoration: none;
+                background: #d2d4b4;
+                color: #111;
+            }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 700px) {
+
+            .header {
+                height: 75px;
+                padding: 0 15px;
+                gap: 12px;
+                border-radius: 0 0 20px 20px;
+            }
+
+            .logo {
+                width: 55px;
+            }
+
+            .meeting-title {
+                font-size: 18px;
+            }
+
+            .meeting-date {
+                min-width: auto;
+                font-size: 13px;
+            }
+
+
+            .content {
+                width: 92%;
+                margin-top: 35px;
+            }
+
+
+            /* تاریخ */
+
+            .date-box {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .date-item {
+                min-height: 85px;
+                border-left: 1px solid #333;
+                border-bottom: 1px solid #333;
+            }
+
+                .date-item:nth-child(3) {
+                    border-left: none;
+                }
+
+                .date-item:nth-child(4),
+                .date-item:nth-child(5),
+                .date-item:nth-child(6) {
+                    border-bottom: none;
+                }
+
+                .date-item:nth-child(6) {
+                    border-left: none;
+                }
+
+            .date-value {
+                font-size: 15px;
+            }
+
+            .date-label {
+                font-size: 12px;
+            }
+
+            .section-title {
+                font-size: 21px;
+            }
+
+
+            /* تکلیف */
+
+            .task {
+                padding: 15px;
+            }
+
+            .task-title {
+                font-size: 17px;
+            }
+
+            .task-description {
+                font-size: 14px;
+                line-height: 1.9;
+                margin-bottom: 12px;
+            }
+
+            .task-meta {
+                font-size: 12px;
+                padding: 8px;
+                overflow-x: auto;
+            }
+
+            .task-table-wrapper {
+                margin-top: 15px;
+            }
+
+            /*
+             * جدول عمداً min-width دارد.
+             * بنابراین در موبایل کاربر می‌تواند
+             * جدول را چپ و راست حرکت دهد.
+             */
+
+            .task-table {
+                min-width: 650px;
+            }
+        }

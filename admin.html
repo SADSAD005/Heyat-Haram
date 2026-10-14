@@ -1,0 +1,2025 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>پنل مدیریت | سلسله جلسات هیئت حرم</title>
+  <style>
+    :root {
+      --bg:#090b0a;
+      --surface:#111512;
+      --surface-hover:#191f1b;
+      --border:#303a33;
+      --text:#f4f6f4;
+      --muted:#a4ada6;
+      --green:#245c4a;
+      --green-hover:#2e735c;
+      --blue:#315f8c;
+      --danger:#a83d3d;
+      --radius:16px;
+    }
+
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+
+    body {
+      margin:0;
+      min-height:100vh;
+      padding:28px 20px 50px;
+      background:var(--bg);
+      color:var(--text);
+      font-family:Tahoma,sans-serif;
+      line-height:1.9;
+    }
+
+    button,input,textarea,select { font:inherit; }
+
+    button {
+      cursor:pointer;
+      border:1px solid transparent;
+      border-radius:10px;
+      padding:9px 16px;
+      color:white;
+      background:var(--green);
+      transition:background .15s ease,border-color .15s ease;
+    }
+
+    button:hover { background:var(--green-hover); }
+    button:disabled { opacity:.45; cursor:not-allowed; }
+
+    button.secondary {
+      background:#252c27;
+      border-color:var(--border);
+    }
+
+    button.secondary:hover { background:#333d35; }
+
+    button.edit-button {
+      background:var(--blue);
+      white-space:nowrap;
+    }
+
+    button.edit-button:hover { background:#4076aa; }
+
+    button.danger {
+      background:#512727;
+      border-color:#754040;
+    }
+
+    button.danger:hover { background:var(--danger); }
+
+    input,textarea,select {
+      width:100%;
+      display:block;
+      color:var(--text);
+      background:#0c100d;
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:10px 12px;
+      outline:none;
+    }
+
+    input:focus,textarea:focus,select:focus {
+      border-color:#43856c;
+      box-shadow:0 0 0 3px #245c4a35;
+    }
+
+    select { cursor:pointer; }
+
+    option {
+      background:var(--surface);
+      color:var(--text);
+    }
+
+    textarea {
+      min-height:100px;
+      resize:vertical;
+    }
+
+    textarea.long-text { min-height:200px; }
+
+    label {
+      display:block;
+      margin:8px 0 5px;
+      font-weight:bold;
+    }
+
+    h1,h2,h3,p { margin-top:0; }
+
+    h1 {
+      margin-bottom:2px;
+      font-size:clamp(21px,3vw,29px);
+    }
+
+    h2 { font-size:21px; }
+
+    .page {
+      width:100%;
+      max-width:1120px;
+      margin:0 auto;
+    }
+
+    .topbar {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      margin-bottom:24px;
+      padding:16px 20px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+    }
+
+    .brand { min-width:0; }
+    .brand h1 { line-height:1.6; }
+
+    .subtitle {
+      color:var(--muted);
+      margin:0;
+      font-size:14px;
+    }
+
+    .account-area {
+      position:relative;
+      flex-shrink:0;
+    }
+
+    .account-button {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#18271f;
+      border-color:#315642;
+      min-width:108px;
+      justify-content:center;
+    }
+
+    .account-button:hover,
+    .account-button[aria-expanded="true"] {
+      background:var(--green);
+    }
+
+    .account-menu {
+      position:absolute;
+      top:calc(100% + 9px);
+      left:0;
+      z-index:20;
+      min-width:170px;
+      padding:7px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#151a16;
+      box-shadow:0 12px 30px #0008;
+    }
+
+    .account-menu button {
+      width:100%;
+      text-align:right;
+    }
+
+    .panel {
+      padding:24px;
+      margin-bottom:22px;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:var(--surface);
+      box-shadow:0 8px 28px #00000012;
+    }
+
+    .panel-heading { margin-bottom:18px; }
+    .panel-heading h2 { margin-bottom:4px; }
+
+    .muted {
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .login-panel {
+      max-width:460px;
+      margin:45px auto;
+    }
+
+    .login-panel h2 { margin-bottom:18px; }
+
+    .login-panel button[type="submit"] {
+      width:100%;
+      margin-top:12px;
+    }
+
+    .content-controls {
+      display:grid;
+      grid-template-columns:minmax(0,1fr);
+      gap:15px;
+    }
+
+    .control-box {
+      padding:17px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#0d110e;
+    }
+
+    .control-box label {
+      margin-top:0;
+      margin-bottom:7px;
+    }
+
+    .content-tabs {
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .content-tab {
+      background:#202721;
+      border:1px solid var(--border);
+      flex:1;
+      min-width:90px;
+    }
+
+    .content-tab.active {
+      background:var(--green);
+      border-color:#43856c;
+    }
+
+    .add-button {
+      width:100%;
+      min-height:50px;
+      font-weight:bold;
+      font-size:16px;
+    }
+
+    .list-header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:20px 0 12px;
+    }
+
+    .list-header h2 { margin:0; }
+
+    .list-count {
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .reports-box {
+      width:100%;
+      height:560px;
+      overflow-y:auto;
+      overflow-x:hidden;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#0c0f0d;
+      scrollbar-color:#3b5545 #111512;
+      scrollbar-width:thin;
+    }
+
+    .report-row {
+      min-height:70px;
+      padding:10px 16px;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(100px,.65fr) auto;
+      align-items:center;
+      gap:16px;
+      border-bottom:1px solid #252c27;
+    }
+
+    .report-row:last-child { border-bottom:none; }
+    .report-row:hover { background:var(--surface-hover); }
+
+    .report-title {
+      min-width:0;
+      overflow-wrap:anywhere;
+      font-weight:bold;
+    }
+
+    .report-date {
+      color:#98a39a;
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    .report-meta {
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+    }
+
+    .report-topic {
+      font-size:12px;
+      color:var(--muted);
+      overflow-wrap:anywhere;
+    }
+
+    .empty-state {
+      min-height:220px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:6px;
+      padding:25px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    .empty-state strong { color:var(--text); }
+
+    .pagination {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .page-indicator {
+      min-width:120px;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .field-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:0 18px;
+    }
+
+    .field { min-width:0; margin-bottom:9px; }
+    .field.full { grid-column:1/-1; }
+
+    .actions {
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      margin-top:18px;
+    }
+
+    .warning {
+      color:#e6c88e;
+      background:#302718;
+      border:1px solid #59472a;
+      padding:12px 14px;
+      border-radius:10px;
+      font-size:13px;
+      margin-bottom:18px;
+    }
+
+    #status {
+      margin:12px 2px;
+      white-space:pre-wrap;
+      overflow-wrap:anywhere;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    #status:empty { display:none; }
+    #status.error { color:#ffaaaa; }
+    #status.success { color:#9fdfb6; }
+
+    .dynamic-section {
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#0c100d;
+      overflow:hidden;
+      margin:10px 0;
+    }
+
+    .dynamic-section>summary {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:13px 15px;
+      cursor:pointer;
+      background:#151b16;
+      font-weight:bold;
+      list-style-position:inside;
+    }
+
+    .dynamic-section-body { padding:14px; }
+
+    .dynamic-items {
+      display:grid;
+      gap:12px;
+      margin-bottom:14px;
+    }
+
+    .dynamic-item {
+      border:1px solid var(--border);
+      border-radius:10px;
+      overflow:hidden;
+      background:var(--surface);
+    }
+
+    .dynamic-item>summary {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:11px;
+      cursor:pointer;
+      overflow-wrap:anywhere;
+    }
+
+    .dynamic-item-body { padding:0 12px 12px; }
+    .dynamic-item-body label { font-size:13px; }
+
+    .dynamic-item-actions {
+      display:flex;
+      justify-content:flex-start;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .topic-summary-title {
+      min-width:0;
+      overflow-wrap:anywhere;
+    }
+
+    .inline-grid {
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+    }
+
+    .small-note {
+      font-size:12px;
+      color:var(--muted);
+      margin:5px 0;
+    }
+
+    .member-chip {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 12px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#121713;
+    }
+
+    .member-chip-main { min-width:0; }
+    .member-chip-name { font-weight:bold; overflow-wrap:anywhere; }
+    .member-chip-sub { font-size:12px; color:var(--muted); }
+
+    .task-picker {
+      display:grid;
+      gap:9px;
+      margin-top:12px;
+    }
+
+    .task-option {
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:12px;
+      background:#111713;
+      cursor:pointer;
+    }
+
+    .task-option:hover {
+      border-color:#4b7b62;
+      background:#172019;
+    }
+
+    .task-option.selected {
+      border-color:#4b9b72;
+      background:#18271d;
+    }
+
+    .task-option-title { font-weight:bold; }
+
+    .task-option-meta {
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .task-option-description {
+      margin-top:8px;
+      padding-top:8px;
+      border-top:1px solid var(--border);
+      font-size:13px;
+      color:#d1d8d2;
+      white-space:pre-wrap;
+    }
+
+    .picker-search { margin-bottom:10px; }
+    .status-select { min-width:130px; }
+    .subheading { margin:12px 0 6px; font-size:15px; }
+
+    @media(max-width:700px) {
+      body { padding:14px 10px 30px; }
+      .topbar { padding:13px; gap:10px; }
+      .panel { padding:16px; }
+
+      .report-row {
+        grid-template-columns:minmax(0,1fr) auto;
+        gap:8px 12px;
+        padding:12px;
+      }
+
+      .report-meta { grid-column:1; grid-row:2; }
+
+      .report-row .edit-button {
+        grid-column:2;
+        grid-row:1/span 2;
+        padding:8px 11px;
+        font-size:12px;
+      }
+
+      .field-grid,.inline-grid { grid-template-columns:1fr; }
+      .field.full { grid-column:auto; }
+      .reports-box { height:560px; }
+      .dynamic-section-body { padding:10px; }
+      .member-chip { align-items:flex-start; flex-direction:column; }
+    }
+
+    @media(max-width:400px) {
+      .brand h1 { font-size:18px; }
+      .subtitle { font-size:12px; }
+      .account-button { min-width:80px; padding:8px 10px; }
+    }
+  </style>
+</head>
+
+<body>
+<main class="page">
+  <header class="topbar">
+    <div class="brand">
+      <h1>پنل مدیریت گزارشات جلسه</h1>
+      <p class="subtitle">مدیریت محتوا</p>
+    </div>
+
+    <div id="accountArea" class="account-area" hidden>
+      <button id="accountButton" class="account-button" type="button"
+        aria-expanded="false" aria-controls="accountMenu">
+        حساب <span aria-hidden="true">⌄</span>
+      </button>
+      <div id="accountMenu" class="account-menu" hidden>
+        <button id="logoutButton" type="button">خروج از حساب</button>
+      </div>
+    </div>
+  </header>
+
+  <section id="loginPanel" class="panel login-panel">
+    <h2>ورود مدیر</h2>
+    <form id="loginForm">
+      <label for="email">ایمیل</label>
+      <input id="email" type="email" required autocomplete="username">
+
+      <label for="password">رمز عبور</label>
+      <input id="password" type="password" required autocomplete="current-password">
+
+      <button type="submit">ورود به پنل</button>
+    </form>
+  </section>
+
+  <section id="adminPanel" hidden>
+    <section class="panel">
+      <div class="panel-heading">
+        <h2>مدیریت محتوا</h2>
+        <p class="muted">نوع محتوا را انتخاب کن تا فهرست مربوط به آن نمایش داده شود.</p>
+      </div>
+
+      <div class="content-controls">
+        <div class="control-box">
+          <label class="control-label">موضوع مدیریت</label>
+          <div class="content-tabs">
+            <button type="button" class="content-tab active" data-type="meetings">جلسات</button>
+            <button type="button" class="content-tab" data-type="members">اعضا</button>
+            <button type="button" class="content-tab" data-type="tasks">تکالیف</button>
+          </div>
+        </div>
+
+        <div class="control-box">
+          <button id="addButton" class="add-button" type="button">افزودن جلسه</button>
+        </div>
+      </div>
+
+      <div class="list-header">
+        <h2 id="listTitle">جلسات</h2>
+        <span id="listCount" class="list-count"></span>
+      </div>
+
+      <div id="meetingsList" class="reports-box">
+        <div class="empty-state">در حال دریافت اطلاعات...</div>
+      </div>
+
+      <nav id="pagination" class="pagination" aria-label="صفحه‌بندی">
+        <button id="previousPage" class="secondary" type="button">قبلی</button>
+        <span id="pageIndicator" class="page-indicator">صفحهٔ ۱</span>
+        <button id="nextPage" class="secondary" type="button">بعدی</button>
+      </nav>
+    </section>
+  </section>
+
+  <section id="editorPanel" class="panel" hidden>
+    <h2 id="editorTitle">ویرایش گزارش جلسه</h2>
+
+    <p class="warning">
+      نام اعضا و تکالیف در فهرست‌ها نمایش داده می‌شود، اما شناسه‌های آن‌ها ذخیره می‌شوند.
+      حذف عضو از حضور و غیاب یا حذف تکلیف از جلسه، رکورد اصلی را حذف نمی‌کند.
+    </p>
+
+    <form id="editorForm">
+      <div class="field-grid">
+        <div class="field full">
+          <label for="meetingName">عنوان جلسه</label>
+          <input id="meetingName" required>
+        </div>
+
+        <div class="field">
+          <label for="dateGregorian">تاریخ میلادی</label>
+          <input id="dateGregorian" type="date">
+        </div>
+
+        <div class="field">
+          <label for="dateSolar">تاریخ شمسی (YYYY-MM-DD)</label>
+          <input id="dateSolar" placeholder="1405-07-03">
+        </div>
+
+        <div class="field">
+          <label for="dateLunar">تاریخ قمری</label>
+          <input id="dateLunar" placeholder="1448-04-13">
+        </div>
+
+        <div class="field">
+          <label for="startTime">ساعت شروع</label>
+          <input id="startTime" type="time">
+        </div>
+
+        <div class="field">
+          <label for="endTime">ساعت پایان</label>
+          <input id="endTime" type="time">
+        </div>
+
+        <div class="field">
+          <label for="moderator">مدیر جلسه</label>
+          <select id="moderator" required></select>
+        </div>
+
+        <div class="field">
+          <label for="secretary">دبیر جلسه</label>
+          <select id="secretary" required></select>
+        </div>
+
+        <div class="field full">
+          <label for="description">خلاصهٔ جلسه</label>
+          <textarea id="description"></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="minutes">متن کامل صورت‌جلسه</label>
+          <textarea id="minutes" class="long-text"></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="topics">موضوعات جلسه (هر موضوع در یک خط)</label>
+          <textarea id="topics"></textarea>
+        </div>
+
+        <!-- حضور و غیاب -->
+        <div class="field full">
+          <details class="dynamic-section" open>
+            <summary>
+              <span>حضور و غیاب</span>
+              <span id="attendanceCount" class="list-count">۰ نفر</span>
+            </summary>
+
+            <div class="dynamic-section-body">
+              <div id="attendanceList" class="dynamic-items"></div>
+
+              <div class="inline-grid">
+                <div>
+                  <label for="addAttendanceMember">افزودن عضو</label>
+                  <select id="addAttendanceMember"></select>
+                </div>
+
+                <div>
+                  <label for="newAttendanceStatus">وضعیت اولیه</label>
+                  <select id="newAttendanceStatus"></select>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button id="addAttendanceButton" type="button">افزودن به حضور و غیاب</button>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="field full">
+          <label for="interruptions">وقفه‌ها (JSON)</label>
+          <textarea id="interruptions" spellcheck="false"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="totalInterruptionMinutes">مجموع زمان وقفه‌ها (دقیقه)</label>
+          <input id="totalInterruptionMinutes" type="number" min="0">
+        </div>
+
+        <!-- تکالیف جلسه -->
+        <div class="field full">
+          <details class="dynamic-section" open>
+            <summary>
+              <span>تکالیف مرتبط با جلسه</span>
+              <span id="tasksCount" class="list-count">۰ تکلیف</span>
+            </summary>
+
+            <div class="dynamic-section-body">
+              <div id="selectedTasksList" class="dynamic-items"></div>
+
+              <h3 class="subheading">افزودن از تکالیف موجود</h3>
+              <p class="small-note">
+                بار اول روی کارت تکلیف کلیک کن تا شرح آن نمایش داده شود.
+                بار دوم روی همان کارت کلیک کن تا تکلیف به جلسه اضافه شود.
+              </p>
+
+              <input id="taskSearch" class="picker-search" placeholder="جست‌وجوی نام یا تاریخ تکلیف">
+              <div id="taskPicker" class="task-picker"></div>
+            </div>
+          </details>
+        </div>
+
+        <!-- موضوعات باز -->
+        <div class="field full">
+          <details class="dynamic-section" open>
+            <summary>
+              <span>موضوعات باز جلسه</span>
+              <span id="openTopicsCount" class="list-count">۰ موضوع</span>
+            </summary>
+
+            <div class="dynamic-section-body">
+              <div id="openTopicsList" class="dynamic-items"></div>
+              <button id="addOpenTopicButton" type="button" class="secondary">+ افزودن موضوع</button>
+            </div>
+          </details>
+        </div>
+
+        <div class="field full">
+          <label for="media">رسانه‌ها (JSON object)</label>
+          <textarea id="media" spellcheck="false"></textarea>
+        </div>
+
+        <div class="field full">
+          <label for="tags">برچسب‌ها (هر برچسب در یک خط)</label>
+          <textarea id="tags"></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="saveButton" type="submit">ذخیرهٔ تغییرات</button>
+        <button id="cancelButton" type="button" class="secondary">لغو</button>
+      </div>
+    </form>
+  </section>
+
+  <p id="status" role="status" aria-live="polite"></p>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase_client.js"></script>
+
+<script>
+(() => {
+  "use strict";
+
+  const ADMIN_UID = "81eddee5-8203-4e5a-9eaa-e1031853d3a6";
+  const PAGE_SIZE = 10;
+  const $ = id => document.getElementById(id);
+
+  const loginPanel = $("loginPanel");
+  const adminPanel = $("adminPanel");
+  const editorPanel = $("editorPanel");
+  const loginForm = $("loginForm");
+  const editorForm = $("editorForm");
+  const statusBox = $("status");
+  const meetingsList = $("meetingsList");
+  const saveButton = $("saveButton");
+
+  let currentMeetingId = null;
+  let originalMeeting = null;
+  let saving = false;
+  let isCreating = false;
+
+  let allMeetings = [];
+  let currentPage = 0;
+  let currentContentType = "meetings";
+
+  let members = [];
+  let tasks = [];
+  let expandedTaskIds = new Set();
+
+  function setStatus(message = "", type = "") {
+    statusBox.textContent = message;
+    statusBox.classList.toggle("error", type === "error");
+    statusBox.classList.toggle("success", type === "success");
+  }
+
+  function closeAccountMenu() {
+    $("accountMenu").hidden = true;
+    $("accountButton").setAttribute("aria-expanded", "false");
+  }
+
+  function toggleAccountMenu() {
+    const opening = $("accountMenu").hidden;
+    $("accountMenu").hidden = !opening;
+    $("accountButton").setAttribute("aria-expanded", String(opening));
+  }
+
+  function showLogin() {
+    loginPanel.hidden = false;
+    adminPanel.hidden = true;
+    editorPanel.hidden = true;
+    $("accountArea").hidden = true;
+    closeAccountMenu();
+  }
+
+  function showAdmin() {
+    loginPanel.hidden = true;
+    adminPanel.hidden = false;
+    $("accountArea").hidden = false;
+  }
+
+  function jsonText(value) {
+    return JSON.stringify(value ?? [], null, 2);
+  }
+
+  function parseJSONField(id, expectedType, label) {
+    let value;
+
+    try {
+      value = JSON.parse($(id).value);
+    } catch {
+      throw new Error("ساختار JSON فیلد «" + label + "» معتبر نیست.");
+    }
+
+    const valid = expectedType === "array"
+      ? Array.isArray(value)
+      : expectedType === "object"
+        ? value !== null &&
+          typeof value === "object" &&
+          !Array.isArray(value)
+        : true;
+
+    if (!valid) {
+      throw new Error(
+        "نوع دادهٔ فیلد «" + label + "» باید " +
+        (expectedType === "array" ? "آرایه" : "شیء JSON") +
+        " باشد."
+      );
+    }
+
+    return value;
+  }
+
+  function makeId(prefix) {
+    if (window.crypto && typeof window.crypto.randomUUID === "function") {
+      return prefix + "-" + window.crypto.randomUUID();
+    }
+
+    return prefix + "-" + Date.now() + "-" +
+      Math.random().toString(36).slice(2, 8);
+  }
+
+  function memberName(id) {
+    const member = members.find(m => m.id === id);
+
+    if (!member) return id || "عضو نامشخص";
+
+    return member.display_name ||
+      [member.name, member.family_name].filter(Boolean).join(" ") ||
+      member.id;
+  }
+
+  function memberSort(a, b) {
+    return (Number(a.sort_order) || 99999) -
+      (Number(b.sort_order) || 99999) ||
+      memberName(a.id).localeCompare(memberName(b.id), "fa");
+  }
+
+  function populateMemberSelect(select, selected = "", includeEmpty = true) {
+    select.replaceChildren();
+
+    if (includeEmpty) {
+      const empty = document.createElement("option");
+      empty.value = "";
+      empty.textContent = "انتخاب کنید";
+      select.appendChild(empty);
+    }
+
+    [...members].sort(memberSort).forEach(member => {
+      const option = document.createElement("option");
+      option.value = member.id;
+      option.textContent = memberName(member.id) +
+        (member.active === false ? " (غیرفعال)" : "");
+      select.appendChild(option);
+    });
+
+    select.value = selected || "";
+
+    // اگر شناسهٔ قدیمی در فهرست فعلی وجود نداشته باشد، آن را حذف نمی‌کنیم.
+    if (selected && ![...select.options].some(o => o.value === selected)) {
+      const missing = document.createElement("option");
+      missing.value = selected;
+      missing.textContent = memberName(selected) + " (در فهرست نیست)";
+      select.appendChild(missing);
+      select.value = selected;
+    }
+  }
+
+  function populateStatusSelect(select, selected = "present") {
+    const options = [
+      ["present", "حاضر"],
+      ["late", "با تأخیر"],
+      ["absent", "غایب"],
+      ["excused", "غایب با عذر"]
+    ];
+
+    select.replaceChildren();
+
+    options.forEach(([value, label]) => {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      select.appendChild(option);
+    });
+
+    // وضعیت ناشناختهٔ موجود در داده حفظ می‌شود.
+    if (selected && !options.some(o => o[0] === selected)) {
+      const option = document.createElement("option");
+      option.value = selected;
+      option.textContent = selected + " (وضعیت موجود)";
+      select.appendChild(option);
+    }
+
+    select.value = selected || "present";
+  }
+
+  async function loadLocalJSON(path) {
+    const response = await fetch(path, { cache: "no-store" });
+
+    if (!response.ok) {
+      throw new Error(
+        "خواندن " + path + " ناموفق بود (HTTP " + response.status + ")."
+      );
+    }
+
+    return response.json();
+  }
+
+  async function loadReferenceData() {
+    const results = await Promise.allSettled([
+      loadLocalJSON("data/members.json"),
+      loadLocalJSON("data/tasks/task_index.json")
+    ]);
+
+    if (results[0].status === "fulfilled") {
+      members = Array.isArray(results[0].value.members)
+        ? results[0].value.members
+        : [];
+    } else {
+      members = [];
+      console.error(results[0].reason);
+      setStatus(
+        "فهرست اعضا بارگذاری نشد. مسیر data/members.json و اجرای سایت از طریق localhost را بررسی کن.",
+        "error"
+      );
+    }
+
+    tasks = [];
+
+    if (results[1].status === "fulfilled") {
+      const ids = Array.isArray(results[1].value.tasks)
+        ? results[1].value.tasks
+        : [];
+
+      const loaded = await Promise.allSettled(
+        ids.map(id => loadLocalJSON("data/tasks/" + encodeURIComponent(id) + ".json"))
+      );
+
+      loaded.forEach((result, index) => {
+        if (result.status === "fulfilled") {
+          tasks.push(result.value);
+        } else {
+          console.warn("Task could not load:", ids[index], result.reason);
+        }
+      });
+    } else {
+      console.error(results[1].reason);
+
+      if (!statusBox.classList.contains("error")) {
+        setStatus(
+          "فهرست تکالیف بارگذاری نشد. مسیر data/tasks/task_index.json را بررسی کن.",
+          "error"
+        );
+      }
+    }
+
+    populateMemberSelect($("moderator"), "", true);
+    populateMemberSelect($("secretary"), "", true);
+    populateMemberSelect($("addAttendanceMember"), "", true);
+    populateStatusSelect($("newAttendanceStatus"), "present");
+  }
+
+  function renderEmpty(message, detail = "") {
+    meetingsList.replaceChildren();
+
+    const state = document.createElement("div");
+    state.className = "empty-state";
+
+    const title = document.createElement("strong");
+    title.textContent = message;
+    state.appendChild(title);
+
+    if (detail) {
+      const description = document.createElement("span");
+      description.textContent = detail;
+      state.appendChild(description);
+    }
+
+    meetingsList.appendChild(state);
+  }
+
+  function renderMeetings() {
+    meetingsList.replaceChildren();
+
+    const total = allMeetings.length;
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+
+    currentPage = Math.max(0, Math.min(currentPage, totalPages - 1));
+
+    $("listTitle").textContent = "جلسات";
+    $("listCount").textContent = total + " گزارش";
+
+    if (!total) {
+      renderEmpty("گزارشی پیدا نشد.");
+    } else {
+      allMeetings
+        .slice(currentPage * PAGE_SIZE, currentPage * PAGE_SIZE + PAGE_SIZE)
+        .forEach(row => {
+          const meeting = row.data || {};
+          const item = document.createElement("div");
+          item.className = "report-row";
+
+          const title = document.createElement("div");
+          title.className = "report-title";
+          title.textContent = meeting.name || "جلسه " + row.id;
+
+          const meta = document.createElement("div");
+          meta.className = "report-meta";
+
+          const date = document.createElement("div");
+          date.className = "report-date";
+          date.textContent =
+            meeting.datetime?.date_solar ||
+            meeting.datetime?.date_gregorian ||
+            "بدون تاریخ";
+
+          const topic = document.createElement("div");
+          topic.className = "report-topic";
+          topic.textContent = "شناسه: " + row.id;
+
+          meta.append(date, topic);
+
+          const edit = document.createElement("button");
+          edit.type = "button";
+          edit.className = "edit-button";
+          edit.textContent = "ویرایش";
+          edit.addEventListener("click", () => openMeetingEditor(meeting));
+
+          item.append(title, meta, edit);
+          meetingsList.appendChild(item);
+        });
+    }
+
+    $("pageIndicator").textContent =
+      "صفحهٔ " + (currentPage + 1) + " از " + totalPages;
+
+    $("previousPage").disabled = currentPage <= 0;
+    $("nextPage").disabled = currentPage >= totalPages - 1;
+  }
+
+  async function loadMeetings() {
+    renderEmpty("در حال دریافت اطلاعات...");
+    $("listCount").textContent = "";
+    $("previousPage").disabled = true;
+    $("nextPage").disabled = true;
+
+    const { data, error } = await supabaseClient
+      .from("meetings")
+      .select("id,data,updated_at")
+      .order("updated_at", { ascending: false });
+
+    if (error) {
+      allMeetings = [];
+      renderEmpty("دریافت گزارش‌ها ناموفق بود.");
+      setStatus("خطا در دریافت گزارش‌ها: " + error.message, "error");
+      return;
+    }
+
+    allMeetings = data || [];
+    currentPage = 0;
+    setStatus("");
+    renderMeetings();
+  }
+
+  // ---------------- موضوعات باز ----------------
+
+  function updateOpenTopicsCount() {
+    $("openTopicsCount").textContent =
+      $("openTopicsList").children.length + " موضوع";
+  }
+
+  function createOpenTopicItem(topic = {}) {
+    const item = document.createElement("details");
+    item.className = "dynamic-item";
+    item.open = true;
+
+    const summary = document.createElement("summary");
+
+    const titleText = document.createElement("span");
+    titleText.className = "topic-summary-title";
+    titleText.textContent = topic.title || "موضوع جدید";
+
+    const arrow = document.createElement("span");
+    arrow.textContent = "⌄";
+    arrow.setAttribute("aria-hidden", "true");
+
+    summary.append(titleText, arrow);
+
+    const body = document.createElement("div");
+    body.className = "dynamic-item-body";
+
+    const titleLabel = document.createElement("label");
+    titleLabel.textContent = "عنوان موضوع";
+
+    const titleInput = document.createElement("input");
+    titleInput.type = "text";
+    titleInput.className = "open-topic-title";
+    titleInput.value = topic.title || "";
+    titleInput.placeholder = "عنوان موضوع را بنویسید";
+    titleInput.required = true;
+
+    const descLabel = document.createElement("label");
+    descLabel.textContent = "شرح موضوع";
+
+    const descInput = document.createElement("textarea");
+    descInput.className = "open-topic-description";
+    descInput.value = topic.description || "";
+    descInput.placeholder = "شرح موضوع را بنویسید";
+
+    const actions = document.createElement("div");
+    actions.className = "dynamic-item-actions";
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "danger";
+    remove.textContent = "حذف موضوع";
+
+    remove.addEventListener("click", () => {
+      item.remove();
+      updateOpenTopicsCount();
+    });
+
+    titleInput.addEventListener("input", () => {
+      titleText.textContent = titleInput.value.trim() || "موضوع جدید";
+    });
+
+    actions.appendChild(remove);
+    body.append(titleLabel, titleInput, descLabel, descInput, actions);
+    item.append(summary, body);
+
+    // شناسهٔ موضوع موجود حفظ می‌شود.
+    item.dataset.topicId = topic.id || "";
+
+    return item;
+  }
+
+  function renderOpenTopics(topics = []) {
+    const container = $("openTopicsList");
+    container.replaceChildren();
+
+    (Array.isArray(topics) ? topics : []).forEach(topic => {
+      container.appendChild(createOpenTopicItem(topic));
+    });
+
+    updateOpenTopicsCount();
+  }
+
+  function readOpenTopics() {
+    return [...$("openTopicsList").children].map(item => {
+      const title = item.querySelector(".open-topic-title").value.trim();
+      const description =
+        item.querySelector(".open-topic-description").value.trim();
+
+      if (!title) {
+        throw new Error("عنوان تمام موضوعات باز باید تکمیل شود.");
+      }
+
+      return {
+        id: item.dataset.topicId || makeId("open"),
+        title,
+        description
+      };
+    });
+  }
+
+  // ---------------- حضور و غیاب ----------------
+
+  function updateAttendanceCount() {
+    $("attendanceCount").textContent =
+      $("attendanceList").children.length + " نفر";
+  }
+
+  function createAttendanceItem(entry = {}) {
+    const item = document.createElement("div");
+    item.className = "member-chip";
+    item.dataset.memberId = entry.member || "";
+    item.dataset.status = entry.status || "present";
+
+    const main = document.createElement("div");
+    main.className = "member-chip-main";
+
+    const name = document.createElement("div");
+    name.className = "member-chip-name";
+    name.textContent = memberName(entry.member);
+
+    const sub = document.createElement("div");
+    sub.className = "member-chip-sub";
+    sub.textContent = entry.member || "";
+
+    main.append(name, sub);
+
+    const controls = document.createElement("div");
+    controls.className = "dynamic-item-actions";
+
+    const status = document.createElement("select");
+    status.className = "status-select";
+    status.setAttribute("aria-label", "وضعیت حضور " + memberName(entry.member));
+    populateStatusSelect(status, entry.status || "present");
+
+    status.addEventListener("change", () => {
+      item.dataset.status = status.value;
+    });
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "danger";
+    remove.textContent = "حذف";
+
+    remove.addEventListener("click", () => {
+      item.remove();
+      updateAttendanceCount();
+
+      const option = [...$("addAttendanceMember").options]
+        .find(o => o.value === item.dataset.memberId);
+
+      if (option) option.disabled = false;
+
+      if (!$("addAttendanceMember").value && option) {
+        $("addAttendanceMember").value = option.value;
+      }
+    });
+
+    controls.append(status, remove);
+    item.append(main, controls);
+
+    return item;
+  }
+
+  function renderAttendance(entries = []) {
+    const container = $("attendanceList");
+    container.replaceChildren();
+
+    (Array.isArray(entries) ? entries : []).forEach(entry => {
+      container.appendChild(createAttendanceItem(entry));
+    });
+
+    updateAttendanceCount();
+
+    const existing = new Set(
+      (Array.isArray(entries) ? entries : []).map(e => e.member)
+    );
+
+    const select = $("addAttendanceMember");
+
+    [...select.options].forEach(option => {
+      option.disabled = !!option.value && existing.has(option.value);
+    });
+
+    const firstAvailable = [...select.options]
+      .find(option => option.value && !option.disabled);
+
+    if (select.selectedOptions[0]?.disabled) {
+      select.value = firstAvailable?.value || "";
+    }
+  }
+
+  function readAttendance() {
+    const entries = [...$("attendanceList").children].map(item => ({
+      member: item.dataset.memberId,
+      status: item.dataset.status || "present"
+    }));
+
+    const seen = new Set();
+
+    for (const entry of entries) {
+      if (!entry.member) {
+        throw new Error("یکی از افراد حضور و غیاب شناسهٔ معتبر ندارد.");
+      }
+
+      if (seen.has(entry.member)) {
+        throw new Error("یک عضو بیش از یک بار در حضور و غیاب ثبت شده است.");
+      }
+
+      seen.add(entry.member);
+    }
+
+    return entries;
+  }
+
+  // ---------------- تکالیف جلسه ----------------
+
+  function taskDate(task) {
+    return task.due_date ||
+      task.registered_date ||
+      task.date ||
+      "بدون تاریخ";
+  }
+
+  function taskTitle(task) {
+    return task.name || task.title || task.id || "تکلیف بدون عنوان";
+  }
+
+  function selectedTaskIds() {
+    return [...$("selectedTasksList").children]
+      .map(el => el.dataset.taskId);
+  }
+
+  function updateTasksCount() {
+    $("tasksCount").textContent =
+      $("selectedTasksList").children.length + " تکلیف";
+  }
+
+  function renderSelectedTasks(ids = []) {
+    const container = $("selectedTasksList");
+    container.replaceChildren();
+
+    (Array.isArray(ids) ? ids : []).forEach(id => {
+      const task = tasks.find(t => t.id === id);
+
+      const item = document.createElement("div");
+      item.className = "member-chip";
+      item.dataset.taskId = id;
+
+      const main = document.createElement("div");
+      main.className = "member-chip-main";
+
+      const title = document.createElement("div");
+      title.className = "member-chip-name";
+      title.textContent = task
+        ? taskTitle(task)
+        : "تکلیف ناشناخته: " + id;
+
+      const meta = document.createElement("div");
+      meta.className = "member-chip-sub";
+      meta.textContent = (task ? taskDate(task) : "") + " · " + id;
+
+      main.append(title, meta);
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "danger";
+      remove.textContent = "حذف از جلسه";
+
+      remove.addEventListener("click", () => {
+        item.remove();
+        updateTasksCount();
+        renderTaskPicker();
+      });
+
+      item.append(main, remove);
+      container.appendChild(item);
+    });
+
+    updateTasksCount();
+    renderTaskPicker();
+  }
+
+  function renderTaskPicker() {
+    const container = $("taskPicker");
+    container.replaceChildren();
+
+    const search = $("taskSearch").value.trim().toLocaleLowerCase("fa");
+    const selected = new Set(selectedTaskIds());
+
+    const available = tasks.filter(task => {
+      const haystack = [
+        taskTitle(task),
+        taskDate(task),
+        task.id,
+        task.description || ""
+      ].join(" ").toLocaleLowerCase("fa");
+
+      return haystack.includes(search);
+    });
+
+    if (!available.length) {
+      const empty = document.createElement("p");
+      empty.className = "muted";
+      empty.textContent = tasks.length
+        ? "تکلیفی با این جست‌وجو پیدا نشد."
+        : "فهرست تکالیف بارگذاری نشده یا خالی است.";
+
+      container.appendChild(empty);
+      return;
+    }
+
+    available.forEach(task => {
+      const card = document.createElement("div");
+      const isSelected = selected.has(task.id);
+
+      card.className = "task-option" + (isSelected ? " selected" : "");
+      card.tabIndex = 0;
+      card.setAttribute("role", "button");
+      card.setAttribute(
+        "aria-label",
+        taskTitle(task) + "، تاریخ " + taskDate(task)
+      );
+
+      const title = document.createElement("div");
+      title.className = "task-option-title";
+      title.textContent = taskTitle(task);
+
+      const meta = document.createElement("div");
+      meta.className = "task-option-meta";
+      meta.textContent = "تاریخ: " + taskDate(task) + " · شناسه: " + task.id;
+
+      card.append(title, meta);
+
+      if (expandedTaskIds.has(task.id)) {
+        const description = document.createElement("div");
+        description.className = "task-option-description";
+        description.textContent =
+          task.description || "برای این تکلیف شرحی ثبت نشده است.";
+
+        card.appendChild(description);
+      }
+
+      if (isSelected) {
+        const chosen = document.createElement("div");
+        chosen.className = "small-note";
+        chosen.textContent = "این تکلیف به جلسه اضافه شده است.";
+        card.appendChild(chosen);
+      }
+
+      function handleTaskClick() {
+        if (selected.has(task.id)) {
+          // اگر قبلاً اضافه شده باشد، کلیک دوباره آن را حذف نمی‌کند.
+          // حذف از بخش تکالیف مرتبط با جلسه انجام می‌شود.
+          expandedTaskIds.has(task.id)
+            ? expandedTaskIds.delete(task.id)
+            : expandedTaskIds.add(task.id);
+
+          renderTaskPicker();
+          return;
+        }
+
+        if (expandedTaskIds.has(task.id)) {
+          const ids = selectedTaskIds();
+          ids.push(task.id);
+          expandedTaskIds.delete(task.id);
+          renderSelectedTasks(ids);
+        } else {
+          expandedTaskIds.add(task.id);
+          renderTaskPicker();
+        }
+      }
+
+      card.addEventListener("click", handleTaskClick);
+
+      card.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          handleTaskClick();
+        }
+      });
+
+      container.appendChild(card);
+    });
+  }
+
+  // ---------------- فرم مشترک جلسه ----------------
+
+  function openMeetingEditor(meeting, creating = false) {
+    isCreating = creating;
+    originalMeeting = structuredClone(meeting);
+    currentMeetingId = meeting.id;
+
+    const dt = meeting.datetime || {};
+
+    $("editorTitle").textContent = creating
+      ? "ایجاد جلسهٔ جدید"
+      : "ویرایش: " + (meeting.name || meeting.id);
+
+    $("meetingName").value = meeting.name || "";
+    $("dateGregorian").value = dt.date_gregorian || "";
+    $("dateSolar").value = dt.date_solar || "";
+    $("dateLunar").value = dt.date_lunar || "";
+    $("startTime").value = dt.start_time || "";
+    $("endTime").value = dt.end_time || "";
+
+    populateMemberSelect($("moderator"), meeting.moderator || "", true);
+    populateMemberSelect($("secretary"), meeting.secretary || "", true);
+    populateMemberSelect($("addAttendanceMember"), "", true);
+
+    $("description").value = meeting.description || "";
+    $("minutes").value = meeting.minutes || "";
+
+    $("topics").value = Array.isArray(meeting.topics)
+      ? meeting.topics.join("\n")
+      : "";
+
+    renderAttendance(meeting.attendance || []);
+
+    $("interruptions").value = jsonText(dt.interruptions || []);
+    $("totalInterruptionMinutes").value =
+      dt.total_interruption_minutes ?? 0;
+
+    $("taskSearch").value = "";
+    expandedTaskIds = new Set();
+    renderSelectedTasks(meeting.tasks || []);
+
+    renderOpenTopics(meeting.open_topics || []);
+
+    $("media").value = JSON.stringify(
+      meeting.media || {audio:[],video:[],images:[]},
+      null,
+      2
+    );
+
+    $("tags").value = Array.isArray(meeting.tags)
+      ? meeting.tags.join("\n")
+      : "";
+
+    editorPanel.hidden = false;
+
+    editorPanel.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  }
+
+  function createMeetingId() {
+    const ids = allMeetings.map(row => String(row.id));
+    let max = 0;
+
+    ids.forEach(id => {
+      const match = id.match(/^meeting-(\d+)$/);
+
+      if (match) {
+        max = Math.max(max, Number(match[1]));
+      }
+    });
+
+    let candidate;
+
+    do {
+      max += 1;
+      candidate = "meeting-" + String(max).padStart(3, "0");
+    } while (ids.includes(candidate));
+
+    return candidate;
+  }
+
+  function addMeeting() {
+    if (currentContentType !== "meetings") {
+      setStatus(
+        "افزودن و ویرایش مستقل اعضا و تکالیف هنوز در این نسخه فعال نشده است.",
+        "error"
+      );
+      return;
+    }
+
+    const id = createMeetingId();
+
+    const newMeeting = {
+      id,
+      name:"",
+      datetime:{
+        date_gregorian:"",
+        date_solar:"",
+        date_lunar:"",
+        start_time:"",
+        end_time:"",
+        interruptions:[],
+        total_interruption_minutes:0
+      },
+      moderator:"",
+      attendance:[],
+      secretary:"",
+      topics:[],
+      description:"",
+      minutes:"",
+      tasks:[],
+      open_topics:[],
+      media:{audio:[],video:[],images:[]},
+      tags:[]
+    };
+
+    openMeetingEditor(newMeeting, true);
+  }
+
+  // ---------------- تغییر تب‌ها ----------------
+
+  function changeContentType(type) {
+    currentContentType = type;
+    currentPage = 0;
+    editorPanel.hidden = true;
+    currentMeetingId = null;
+    originalMeeting = null;
+    isCreating = false;
+
+    document.querySelectorAll(".content-tab").forEach(tab => {
+      tab.classList.toggle("active", tab.dataset.type === type);
+    });
+
+    if (type === "meetings") {
+      $("listTitle").textContent = "جلسات";
+      $("addButton").textContent = "افزودن جلسه";
+      $("addButton").disabled = false;
+      $("pagination").hidden = false;
+      renderMeetings();
+      return;
+    }
+
+    $("listTitle").textContent = type === "members" ? "اعضا" : "تکالیف";
+    $("listCount").textContent = "";
+    $("pagination").hidden = true;
+    $("addButton").textContent = type === "members" ? "افزودن عضو" : "افزودن تکلیف";
+    $("addButton").disabled = false;
+    meetingsList.replaceChildren();
+
+    const rows = type === "members"
+      ? [...members].sort(memberSort)
+      : [...tasks].sort((a,b) =>
+          (Number(a.number) || 99999) - (Number(b.number) || 99999)
+        );
+
+    $("listCount").textContent =
+      rows.length + (type === "members" ? " عضو" : " تکلیف");
+
+    if (!rows.length) {
+      renderEmpty("موردی پیدا نشد.");
+      return;
+    }
+
+    rows.forEach(record => {
+      const item = document.createElement("div");
+      item.className = "report-row";
+
+      const title = document.createElement("div");
+      title.className = "report-title";
+      title.textContent = type === "members"
+        ? memberName(record.id)
+        : taskTitle(record);
+
+      const meta = document.createElement("div");
+      meta.className = "report-meta";
+
+      const date = document.createElement("div");
+      date.className = "report-date";
+      date.textContent = type === "members"
+        ? (record.active === false ? "غیرفعال" : "فعال")
+        : "تاریخ: " + taskDate(record);
+
+      const sub = document.createElement("div");
+      sub.className = "report-topic";
+      sub.textContent = "شناسه: " + record.id;
+
+      meta.append(date, sub);
+
+      const detail = document.createElement("div");
+      detail.className = "report-topic";
+      detail.textContent = type === "tasks"
+        ? (record.description || "بدون شرح")
+        : (record.role || "");
+
+      item.append(title, meta, detail);
+      meetingsList.appendChild(item);
+    });
+
+    setStatus("");
+  }
+
+  // ---------------- ورود و خروج ----------------
+
+  async function checkSession() {
+    showLogin();
+
+    const {data,error} = await supabaseClient.auth.getSession();
+
+    if (error) {
+      setStatus("خطا در بررسی ورود: " + error.message, "error");
+      return;
+    }
+
+    const user = data.session?.user;
+
+    if (!user) {
+      setStatus("");
+      return;
+    }
+
+    if (user.id !== ADMIN_UID) {
+      await supabaseClient.auth.signOut();
+      setStatus("این حساب اجازهٔ ورود به پنل مدیریت را ندارد.", "error");
+      return;
+    }
+
+    showAdmin();
+    await loadMeetings();
+  }
+
+  loginForm.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const email = $("email").value.trim();
+    const password = $("password").value;
+
+    setStatus("در حال ورود...");
+
+    const {data,error} = await supabaseClient.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if (error) {
+      setStatus("ورود ناموفق بود: " + error.message, "error");
+      return;
+    }
+
+    if (data.user?.id !== ADMIN_UID) {
+      await supabaseClient.auth.signOut();
+      setStatus("این حساب، مدیر مجاز این پنل نیست.", "error");
+      return;
+    }
+
+    loginForm.reset();
+    showAdmin();
+    await loadMeetings();
+  });
+
+  $("accountButton").addEventListener("click", event => {
+    event.stopPropagation();
+    toggleAccountMenu();
+  });
+
+  document.addEventListener("click", event => {
+    if (!$("accountArea").contains(event.target)) {
+      closeAccountMenu();
+    }
+  });
+
+  $("logoutButton").addEventListener("click", async () => {
+    closeAccountMenu();
+
+    const {error} = await supabaseClient.auth.signOut();
+
+    if (error) {
+      setStatus("خطا در خروج: " + error.message, "error");
+      return;
+    }
+
+    allMeetings = [];
+    meetingsList.replaceChildren();
+    editorPanel.hidden = true;
+    currentMeetingId = null;
+    originalMeeting = null;
+
+    showLogin();
+    setStatus("");
+  });
+
+  document.querySelectorAll(".content-tab").forEach(button => {
+    button.addEventListener("click", () => {
+      changeContentType(button.dataset.type);
+    });
+  });
+
+  $("addButton").addEventListener("click", addMeeting);
+
+  $("previousPage").addEventListener("click", () => {
+    if (currentPage > 0) {
+      currentPage--;
+      renderMeetings();
+    }
+  });
+
+  $("nextPage").addEventListener("click", () => {
+    if ((currentPage + 1) * PAGE_SIZE < allMeetings.length) {
+      currentPage++;
+      renderMeetings();
+    }
+  });
+
+  // افزودن عضو به حضور و غیاب
+  $("addAttendanceButton").addEventListener("click", () => {
+    const memberId = $("addAttendanceMember").value;
+
+    if (!memberId) {
+      setStatus("ابتدا یک عضو انتخاب کن.", "error");
+      return;
+    }
+
+    if ([...$("attendanceList").children]
+      .some(item => item.dataset.memberId === memberId)) {
+      setStatus("این عضو از قبل در فهرست حضور و غیاب است.", "error");
+      return;
+    }
+
+    const entry = {
+      member:memberId,
+      status:$("newAttendanceStatus").value || "present"
+    };
+
+    $("attendanceList").appendChild(createAttendanceItem(entry));
+    updateAttendanceCount();
+
+    const option = [...$("addAttendanceMember").options]
+      .find(o => o.value === memberId);
+
+    if (option) option.disabled = true;
+
+    const next = [...$("addAttendanceMember").options]
+      .find(o => o.value && !o.disabled);
+
+    $("addAttendanceMember").value = next?.value || "";
+    setStatus("");
+  });
+
+  // افزودن موضوع باز
+  $("addOpenTopicButton").addEventListener("click", () => {
+    const item = createOpenTopicItem();
+
+    $("openTopicsList").appendChild(item);
+    updateOpenTopicsCount();
+
+    item.scrollIntoView({
+      behavior:"smooth",
+      block:"nearest"
+    });
+
+    item.querySelector(".open-topic-title").focus();
+  });
+
+  $("taskSearch").addEventListener("input", renderTaskPicker);
+
+  $("cancelButton").addEventListener("click", () => {
+    editorPanel.hidden = true;
+    currentMeetingId = null;
+    originalMeeting = null;
+    isCreating = false;
+    editorForm.reset();
+    setStatus("");
+  });
+
+  // ---------------- ذخیرهٔ جلسه ----------------
+
+  editorForm.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    if (saving || !currentMeetingId || !originalMeeting) return;
+
+    saving = true;
+    saveButton.disabled = true;
+
+    try {
+      const updated = structuredClone(originalMeeting);
+
+      updated.id = currentMeetingId;
+      updated.name = $("meetingName").value.trim();
+      updated.moderator = $("moderator").value;
+      updated.secretary = $("secretary").value;
+      updated.description = $("description").value;
+      updated.minutes = $("minutes").value;
+
+      updated.datetime = {
+        ...(updated.datetime || {}),
+        date_gregorian:$("dateGregorian").value,
+        date_solar:$("dateSolar").value.trim(),
+        date_lunar:$("dateLunar").value.trim(),
+        start_time:$("startTime").value,
+        end_time:$("endTime").value,
+        interruptions:parseJSONField(
+          "interruptions",
+          "array",
+          "وقفه‌ها"
+        ),
+        total_interruption_minutes:
+          Number($("totalInterruptionMinutes").value || 0)
+      };
+
+      updated.topics = $("topics").value
+        .split("\n")
+        .map(value => value.trim())
+        .filter(Boolean);
+
+      updated.attendance = readAttendance();
+      updated.tasks = selectedTaskIds();
+      updated.open_topics = readOpenTopics();
+      updated.media = parseJSONField("media", "object", "رسانه‌ها");
+
+      updated.tags = $("tags").value
+        .split("\n")
+        .map(value => value.trim())
+        .filter(Boolean);
+
+      if (!updated.name) {
+        throw new Error("عنوان جلسه را وارد کن.");
+      }
+
+      const {
+        data:sessionData,
+        error:sessionError
+      } = await supabaseClient.auth.getSession();
+
+      if (
+        sessionError ||
+        !sessionData.session ||
+        sessionData.session.user.id !== ADMIN_UID
+      ) {
+        throw new Error("نشست مدیر معتبر نیست؛ دوباره وارد شو.");
+      }
+
+      setStatus("در حال ذخیرهٔ تغییرات...");
+
+      let result;
+
+      if (isCreating) {
+        result = await supabaseClient
+          .from("meetings")
+          .insert({
+            id:currentMeetingId,
+            data:updated,
+            updated_at:new Date().toISOString()
+          });
+      } else {
+        result = await supabaseClient
+          .from("meetings")
+          .update({
+            data:updated,
+            updated_at:new Date().toISOString()
+          })
+          .eq("id", currentMeetingId);
+      }
+
+      if (result.error) {
+        throw new Error(result.error.message);
+      }
+
+      editorPanel.hidden = true;
+      currentMeetingId = null;
+      originalMeeting = null;
+      isCreating = false;
+
+      await loadMeetings();
+
+      setStatus("جلسه با موفقیت در Supabase ذخیره شد.", "success");
+    } catch(error) {
+      setStatus("ذخیره انجام نشد: " + error.message, "error");
+    } finally {
+      saving = false;
+      saveButton.disabled = false;
+    }
+  });
+
+  async function init() {
+    if (!window.supabase || typeof supabaseClient === "undefined") {
+      setStatus(
+        "کتابخانه یا اتصال Supabase بارگذاری نشده است. اتصال شبکه و js/supabase_client.js را بررسی کن.",
+        "error"
+      );
+      return;
+    }
+
+    await loadReferenceData();
+    await checkSession();
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
