@@ -38,9 +38,12 @@ presentMembers.length
 
 presentMembers.forEach(
 item => {
+console.log("Attendance item:", item);
+console.log("Member IDs:", members.map(m => m.id));
+console.log("Lookup ID:", item.member_id || item.member);
 const member =
 getMember(
-item.member,
+item.member_id || item.member,
 members
 );
 
